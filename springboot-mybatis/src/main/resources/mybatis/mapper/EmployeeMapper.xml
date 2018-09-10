@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyoyang.mapper.EmployeeMapper">
+
+    <insert id="saveEmployee" parameterType="com.lyoyang.entity.Employee" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO employee(lastName) VALUES (#{lastName})
+    </insert>
+
+    <select id="getEmplById" parameterType="java.lang.Integer" resultType="com.lyoyang.entity.Employee">
+        SELECT * FROM employee WHERE id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    test1:
+      jdbc-url: jdbc:mysql://localhost:3306/test
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+    test2:
+      jdbc-url: jdbc:mysql://localhost:3306/lucene
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+server:
+  port: 8088
+  servlet:
+    context-path: /lyoyang
+logging:
+  path: classpath:logback-boot.xml

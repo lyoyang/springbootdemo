@@ -1,0 +1,8 @@
+spring:
+  messages:
+    basename: il8n.login
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true

@@ -1,0 +1,9 @@
+spring:
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML5
+  devtools:
+    livereload:
+      enabled: true
+
