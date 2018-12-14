@@ -1,26 +1,24 @@
-package com.lyoyang.springbootlianshou.controller;
+package com.lyoyang.dao;
 
-
+import com.lyoyang.ApplicationTests;
 import com.lyoyang.springbootlianshou.entities.User;
-import com.lyoyang.springbootlianshou.exception.UserNotExistException;
 import com.lyoyang.springbootlianshou.mapper.UserMapper;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-public class HelloController {
+/**
+ * @Auther: yangbing
+ * @Date: 2018/12/14 15:49
+ * @Description:
+ */
+public class UserTest extends ApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello(String username) {
-        if("aaaa".equals(username)){
-            throw new UserNotExistException();
-        }
+
+    @Test
+    public void test_batchSavve() {
         long startTime = System.currentTimeMillis();
         User user = new User();
         for(int i = 1; i<=10000; i++ ) {
@@ -29,6 +27,6 @@ public class HelloController {
             userMapper.insertSelective(user);
         }
         System.out.println("花费时间：" + (System.currentTimeMillis() - startTime));
-        return username;
     }
+
 }

@@ -1,10 +1,21 @@
 package com.lyoyang.entity;
 
 public class Student {
+    private Integer id;
 
     private String username;
+
     private Integer age;
+
     private String gender;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -28,14 +39,5 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "username='" + username + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
     }
 }

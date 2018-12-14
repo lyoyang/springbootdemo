@@ -1,4 +1,4 @@
-package com.lyoyang.springbootlianshou.dao;
+package com.lyoyang.springbootlianshou.mapper;
 
 import java.util.Collection;
 import java.util.HashMap;

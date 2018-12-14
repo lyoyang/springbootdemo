@@ -5,6 +5,7 @@ import com.lyoyang.entity.Employee;
 import com.lyoyang.entity.Student;
 import com.lyoyang.mapper.DepartmentMapper;
 import com.lyoyang.mapper.EmployeeMapper;
+import com.lyoyang.mapper.StudentMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,6 +32,9 @@ public class SpringbootMybatisApplicationTests {
 
 	@Autowired
 	private DepartmentMapper departmentMapper;
+
+	@Autowired
+	private StudentMapper studentMapper;
 	@Test
 	public void contextLoads() throws SQLException {
 		Connection connection = dataSource.getConnection();
@@ -51,6 +57,24 @@ public class SpringbootMybatisApplicationTests {
 		department.setDepartmentName("test");
 		departmentMapper.insertDept(department);
 		System.out.println(department.getId() + ">>>>>>>");
+	}
+
+	@Test
+	public void test_batch() {
+		int i = studentMapper.updateBatch(getStuList());
+		System.out.println(i);
+	}
+
+	private List<Student> getStuList() {
+		ArrayList<Student> list = new ArrayList<>();
+		Student stu = new Student();
+		for(int i = 1; i<=3; i++) {
+			stu.setId(i);
+			stu.setUsername("jim" + i);
+			stu.setAge(i);
+			list.add(stu);
+		}
+		return list;
 	}
 
 }
