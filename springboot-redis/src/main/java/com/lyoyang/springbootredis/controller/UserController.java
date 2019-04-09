@@ -8,10 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Executors;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final String KEY = "MCH_FEE";
+    private static int count = 0;
+
     @Autowired
     private RedisService redisService;
 
@@ -24,14 +29,27 @@ public class UserController {
 
     @RequestMapping("/saveUser")
     public String saveUser(User user) {
+            count = count + 1;
 //        redisService.saveUser(user);
-        for(int i = 0; i<1000; i++) {
-            new Thread(new MyThread(i)).start();
+//        for(int i = 0; i<10; i++) {
+//            new Thread(new MyThread(i)).start();
+//        }
+
+        boolean lock = redisService.lock(KEY, 10, 3, 3000);
+        if(lock) {
+            System.out.println(Thread.currentThread() + "获得锁");
+            try {
+                Thread.sleep(1000);
+                redisService.releaseLock(KEY);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        System.out.println("请求次数：" + count);
         return "success";
     }
     class MyThread implements Runnable {
-        private static final String KEY = "MCH_FEE";
+
         private Integer id;
         public MyThread(Integer id) {
             this.id = id;
@@ -39,9 +57,15 @@ public class UserController {
 
         @Override
         public void run() {
-            boolean lock = redisService.lock(KEY, 10000, 3, 1000);
+            boolean lock = redisService.lock(KEY, 2, 3, 3000);
             if(lock) {
                 System.out.println(Thread.currentThread() + "获得锁");
+                try {
+                    Thread.sleep(1000);
+                    redisService.releaseLock(KEY);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

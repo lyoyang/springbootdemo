@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lyoyang.springbootredis.dao.UserMapper;
 import com.lyoyang.springbootredis.entity.User;
+import io.lettuce.core.RedisAsyncCommandsImpl;
+import io.lettuce.core.RedisFuture;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,9 +14,12 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCommands;
+import redis.clients.jedis.Protocol;
+import redis.clients.util.SafeEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,36 +112,38 @@ public class RedisService {
         return result;
     }
 
-    public boolean releaseLock(String key) {
-        // 释放锁的时候，有可能因为持锁之后方法执行时间大于锁的有效期，此时有可能已经被另外一个线程持有锁，所以不能直接删除
-        final List<String> keys = new ArrayList<String>();
-        keys.add(key);
-        final List<String> args = new ArrayList<String>();
-        args.add(lockFlag.get());
-
-        // 使用lua脚本删除redis中匹配value的key，可以避免由于方法执行时间过长而redis锁自动过期失效的时候误删其他线程的锁
-        // spring自带的执行脚本方法中，集群模式直接抛出不支持执行脚本的异常，所以只能拿到原redis的connection来执行脚本
-        Long result = (Long) redisTemplate.execute(new RedisCallback<Long>() {
-            public Long doInRedis(RedisConnection connection) throws DataAccessException {
-                Object nativeConnection = connection.getNativeConnection();
-                // 单机模式
-                return (Long) ((Jedis) nativeConnection).eval(UNLOCK_LUA, keys, args);
-            }
-        });
-        return result != null && result > 0;
+    public void releaseLock(String key) {
+        System.out.println(Thread.currentThread() + "释放锁");
+        redisTemplate.delete(key);
     }
 
 
     private boolean setRedis(final String key, final long expire) {
-        String result = (String) redisTemplate.execute(new RedisCallback<String>() {
+        RedisCallback<Boolean> redisCallback = new RedisCallback<Boolean>() {
             @Override
-            public String doInRedis(RedisConnection connection) throws DataAccessException {
-                JedisCommands commands = (JedisCommands) connection.getNativeConnection();
-                String uuid = UUID.randomUUID().toString();
-                lockFlag.set(uuid);
-                return commands.set(key, uuid, "NX", "PX", expire);
+            public Boolean doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                RedisSerializer valueSerializer = redisTemplate.getValueSerializer();
+                RedisSerializer keySerializer = redisTemplate.getKeySerializer();
+                String value = UUID.randomUUID().toString();
+                Object obj = redisConnection.execute("set", keySerializer.serialize(key),
+                        valueSerializer.serialize(value),
+                        SafeEncoder.encode("NX"),
+                        SafeEncoder.encode("EX"),
+                        Protocol.toByteArray(expire));
+                return obj != null;
             }
-        });
-        return !StringUtils.isEmpty(result);
+        };
+        Boolean res = (Boolean) redisTemplate.execute(redisCallback);
+        return res;
+//        String result = (String) redisTemplate.execute(new RedisCallback<String>() {
+//            @Override
+//            public String doInRedis(RedisConnection connection) throws DataAccessException {
+//                JedisCommands commands = (JedisCommands) connection.getNativeConnection();
+//                String uuid = UUID.randomUUID().toString();
+//                lockFlag.set(uuid);
+//                return commands.set(key, uuid, "NX", "PX", expire);
+//            }
+//        });
+//        return !StringUtils.isEmpty(result);
     }
 }
