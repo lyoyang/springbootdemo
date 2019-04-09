@@ -20,6 +20,7 @@ public class UserTest extends ApplicationTests {
     @Test
     public void test_batchSavve() {
         long startTime = System.currentTimeMillis();
+        System.out.println(startTime);
         User user = new User();
         for(int i = 1; i<=10000; i++ ) {
             user.setName("test-" + i);
@@ -27,6 +28,11 @@ public class UserTest extends ApplicationTests {
             userMapper.insertSelective(user);
         }
         System.out.println("花费时间：" + (System.currentTimeMillis() - startTime));
+    }
+
+    @Test
+    public void test_copy() {
+        System.out.println(123);
     }
 
 }

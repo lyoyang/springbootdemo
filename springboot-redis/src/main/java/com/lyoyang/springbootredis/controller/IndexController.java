@@ -14,11 +14,11 @@ import java.util.Map;
 @RestController
 public class IndexController {
 
-    @RequestMapping("/")
-    public String index() {
-//        int i = 1/0;
-        return "hello springboot";
-    }
+//    @RequestMapping("/")
+//    public String index() {
+////        int i = 1/0;
+//        return "hello springboot";
+//    }
 
     @RequestMapping("/getUser")
     public Map<Integer,User> getUser() {

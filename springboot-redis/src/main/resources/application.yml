@@ -11,7 +11,7 @@ spring:
   redis:
 #    数据库索引
     database: 0
-    host: 127.0.0.1
+    host: 192.168.205.10
     port: 6379
     jedis:
       pool:
@@ -25,6 +25,7 @@ spring:
         min-idle: 0
 #        连接超时时间(毫秒)
     timeout: 60
+    password: 12345
 logging:
   level:
     com.lyoyang.springbootredis.dao: trace

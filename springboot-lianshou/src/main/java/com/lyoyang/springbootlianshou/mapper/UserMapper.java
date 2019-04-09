@@ -3,6 +3,7 @@ package com.lyoyang.springbootlianshou.mapper;
 import com.lyoyang.springbootlianshou.entities.User;
 import com.lyoyang.springbootlianshou.entities.UserExample;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> getByParam(Map<String, Object> param);
 }
