@@ -34,7 +34,7 @@ public class RedisConfig {
     @Value("${spring.redis.jedis.pool.min-idle}")
     private int minIdle;
 
-    @Bean
+    @Bean("redisTemplate")
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);

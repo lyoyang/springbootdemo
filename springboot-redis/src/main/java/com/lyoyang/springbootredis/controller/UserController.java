@@ -24,8 +24,27 @@ public class UserController {
 
     @RequestMapping("/saveUser")
     public String saveUser(User user) {
-        redisService.saveUser(user);
+//        redisService.saveUser(user);
+        for(int i = 0; i<1000; i++) {
+            new Thread(new MyThread(i)).start();
+        }
         return "success";
     }
+    class MyThread implements Runnable {
+        private static final String KEY = "MCH_FEE";
+        private Integer id;
+        public MyThread(Integer id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            boolean lock = redisService.lock(KEY, 10000, 3, 1000);
+            if(lock) {
+                System.out.println(Thread.currentThread() + "获得锁");
+            }
+        }
+    }
+
 
 }

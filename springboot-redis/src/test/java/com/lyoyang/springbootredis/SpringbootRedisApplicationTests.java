@@ -19,7 +19,7 @@ import java.util.List;
 public class SpringbootRedisApplicationTests {
 
 	@Autowired
-	RedisService redisService;
+	private RedisService redisService;
 
 	@Before
 	public void setUp(){}
@@ -57,4 +57,37 @@ public class SpringbootRedisApplicationTests {
 		}
 		redisService.add("userList",list,3453535L);
 	}
+
+
+	class MyThread implements Runnable {
+		private static final String KEY = "MCH_FEE";
+		private String key;
+		private long expireTime;
+		private int times;
+		private long sleepTime;
+
+        public MyThread(String key, long expireTime, int times, long sleepTime) {
+            this.key = key;
+            this.expireTime = expireTime;
+            this.times = times;
+            this.sleepTime = sleepTime;
+        }
+
+        @Override
+		public void run() {
+			boolean lock = redisService.lock(KEY, expireTime, times, sleepTime);
+			if(lock) {
+				System.out.println(Thread.currentThread() + "获得锁");
+			}
+		}
+	}
+
+	@Test
+	public void testLock() {
+//		for(int i = 0; i<1000; i++) {
+//			new Thread(new MyThread(i)).start();
+//		}
+	}
+
+
 }
