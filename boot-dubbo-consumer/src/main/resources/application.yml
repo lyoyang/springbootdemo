@@ -1,0 +1,10 @@
+dubbo:
+  application:
+    name: user-service-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  consumer:
+#    check: false
+#    check: false
+server:
+  port: 8099
