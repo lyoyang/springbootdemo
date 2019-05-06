@@ -46,4 +46,11 @@ public class UserController {
     }
 
 
+    @RequestMapping("/getUserInfo")
+    public String getUserInfo() {
+        int a= 8;
+        return "hello jim";
+    }
+
+
 }

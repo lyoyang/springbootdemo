@@ -6,7 +6,7 @@
 	<groupId>com.lyoyang</groupId>
 	<artifactId>springboot-start</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>springboot-start</name>
 	<description>Demo project for Spring Boot</description>
