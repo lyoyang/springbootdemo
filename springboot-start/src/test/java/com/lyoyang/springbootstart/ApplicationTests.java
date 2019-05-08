@@ -1,5 +1,6 @@
 package com.lyoyang.springbootstart;
 
+import com.lyoyang.springbootstart.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,14 @@ public class ApplicationTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("hello springboot"));
+    }
+
+    @Autowired
+    private Student student;
+
+
+    @Test
+    public void test_out() {
+        System.out.println(student.toString());
     }
 }
