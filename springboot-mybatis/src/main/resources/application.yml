@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true
     username: root
-    password: yang2826
+    password: root
 #    schema:
 #      - classpath:sql/department.sql
 #      - classpath:sql/employee.sql
