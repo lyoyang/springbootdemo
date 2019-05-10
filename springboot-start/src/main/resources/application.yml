@@ -18,5 +18,8 @@ server:
   port: 8088
   servlet:
     context-path: /lyoyang
-logging:
-  path: classpath:logback-boot.xml
+#logging:
+#  path: classpath:logback-boot.xml
+stu:
+  name: jim
+  age: 23

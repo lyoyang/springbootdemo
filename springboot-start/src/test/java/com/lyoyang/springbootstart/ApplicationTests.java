@@ -1,6 +1,7 @@
 package com.lyoyang.springbootstart;
 
 import org.assertj.core.util.Lists;
+import com.lyoyang.springbootstart.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -70,4 +70,13 @@ public class ApplicationTests {
         }
     }
 
+    @Autowired
+    private Student student;
+
+
+
+    @Test
+    public void test_out() {
+        System.out.println(student.toString());
+    }
 }

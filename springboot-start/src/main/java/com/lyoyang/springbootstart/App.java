@@ -6,13 +6,15 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"com.lyoyang.springbootstart.controller","com.lyoyang.springbootstart.service","com.lyoyang.springbootstart.datasource","com.lyoyang.springbootstart.aspect"})
+@ComponentScan(basePackages = {"com.lyoyang.springbootstart.controller","com.lyoyang.springbootstart.service","com.lyoyang.springbootstart.entity","com.lyoyang.springbootstart.datasource","com.lyoyang.springbootstart.aspect"})
 @EnableAutoConfiguration
 @MapperScan("com.lyoyang.springbootstart.mapper")
 @SpringBootConfiguration
+@EnableConfigurationProperties
 public class App extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
