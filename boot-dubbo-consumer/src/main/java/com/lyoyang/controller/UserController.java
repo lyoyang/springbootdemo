@@ -20,5 +20,11 @@ public class UserController {
         return user;
     }
 
+    public User defaultValue(Integer id) {
+        User user = new User();
+        user.setEmail("default");
+        user.setName("default");
+        return user;
+    }
 
 }

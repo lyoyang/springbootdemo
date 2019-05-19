@@ -4,7 +4,7 @@ dubbo:
   registry:
     address: zookeeper://127.0.0.1:2181
   consumer:
-#    check: false
-#    check: false
+    check: false
+    group: consume-group
 server:
   port: 8099
