@@ -1,11 +1,13 @@
 package com.lyoyang.springbootstart;
 
+import com.lyoyang.springbootstart.entity.StudentDto;
 import org.assertj.core.util.Lists;
 import com.lyoyang.springbootstart.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -77,6 +79,13 @@ public class ApplicationTests {
 
     @Test
     public void test_out() {
-        System.out.println(student.toString());
+
+        Student student = new Student();
+        student.setAge(12);
+        student.setName("jim");
+        StudentDto studentDto = new StudentDto();
+        BeanUtils.copyProperties(student, studentDto);
+        System.out.println(studentDto.toString());
+
     }
 }

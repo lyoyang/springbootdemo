@@ -14,3 +14,4 @@ dubbo:
     timeout: 3000
 #  scan:
 #    base-packages: com.lyoyang.api.impl
+debug: true

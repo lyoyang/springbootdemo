@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @EnableDubbo
 @SpringBootApplication
-@EnableHystrix
+//@EnableHystrix
 public class BootDubboConsumerApplication {
 
     public static void main(String[] args) {
