@@ -16,3 +16,4 @@ dubbo:
     group: mygroup
 #  scan:
 #    base-packages: com.lyoyang.api.impl
+debug: true

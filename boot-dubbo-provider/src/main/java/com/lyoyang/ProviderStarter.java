@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
 @EnableDubbo
-@EnableHystrix
+//@EnableHystrix
 public class ProviderStarter {
 
     public static void main(String[] args) {

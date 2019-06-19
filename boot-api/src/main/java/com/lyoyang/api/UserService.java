@@ -4,6 +4,6 @@ import com.lyoyang.entity.User;
 
 public interface UserService {
 
-    User getUserInfoById(Integer id);
+    User getUserInfoById(User user);
 
 }

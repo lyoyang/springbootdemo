@@ -12,14 +12,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @HystrixCommand
-    public User getUserInfoById(Integer id) {
-        User user = new User();
-        user.setId(id);
-        user.setName("test:" + id);
-        user.setEmail("test@" + id + ".com");
-        if(Math.random() > 0.5) {
-            throw new RuntimeException();
-        }
+    public User getUserInfoById(User user) {
+//        if(Math.random() > 0.5) {
+//            throw new RuntimeException();
+//        }
         return user;
     }
 }
