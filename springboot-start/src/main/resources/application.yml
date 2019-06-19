@@ -16,8 +16,8 @@ spring:
       driverClassName: com.mysql.jdbc.Driver
 server:
   port: 8088
-  servlet:
-    context-path: /lyoyang
+#  servlet:
+#    context-path: /lyoyang
 #logging:
 #  path: classpath:logback-boot.xml
 stu:
