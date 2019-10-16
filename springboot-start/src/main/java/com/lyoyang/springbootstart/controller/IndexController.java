@@ -1,6 +1,7 @@
 package com.lyoyang.springbootstart.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -120,6 +121,30 @@ public class IndexController {
         }
         return new MvcResponse(MvcMessage.CODE_SUCCESS);
     }
+
+
+    @RequestMapping(value = "/testMime1",
+            produces = "application/json;charset=UTF-8",
+            headers = "a=1",
+            consumes = "application/json")
+    public String testMime1(User user) {
+        return JSONObject.toJSONString(user);
+    }
+
+    @RequestMapping(value = "/testMime2",
+            headers = "Accept=application/json")
+    public String testMime2(User user, HttpServletRequest request) {
+        String accept = request.getHeader("Accept");
+        return JSONObject.toJSONString(user);
+
+    }
+
+
+
+
+
+
+
 
 
 
