@@ -123,6 +123,14 @@ public class IndexController {
     }
 
 
+    /**
+     *
+     * @param user
+     * @return
+     * 限定返回数据格式为：pdf
+     * 限定请求头中必须有参数：a=1,否则会请求失败
+     * 限定请求数据格式必须为json
+     */
     @RequestMapping(value = "/testMime1",
             produces = "application/json;charset=UTF-8",
             headers = "a=1",
@@ -131,16 +139,110 @@ public class IndexController {
         return JSONObject.toJSONString(user);
     }
 
+    /**
+     *
+     * @param user
+     * @param request
+     * @return
+     * 限定返回数据格式为：xml
+     * 请求数据格式必须为：json
+     */
     @RequestMapping(value = "/testMime2",
-            headers = "Accept=application/json")
+            headers = {"Accept=text/xml","Content-Type=application/json"})
     public String testMime2(User user, HttpServletRequest request) {
-        String accept = request.getHeader("Accept");
-        return JSONObject.toJSONString(user);
+        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+                "<note>\n" +
+                "<to>George</to>\n" +
+                "<from>John</from>\n" +
+                "<heading>Reminder</heading>\n" +
+                "<body>Don't forget the meeting!</body>\n" +
+                "</note>";
+
+    }
+
+
+    /**
+     *
+     * @param user
+     * @param request
+     * @return
+     * 指定返回数据格式为xml
+     */
+    @RequestMapping(value = "/testMime3",
+            produces = "application/xml;charset=utf-8")
+    public String testMime3(User user, HttpServletRequest request) {
+        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+                "<note>\n" +
+                "<to>George</to>\n" +
+                "<from>John</from>\n" +
+                "<heading>Reminder</heading>\n" +
+                "<body>Don't forget the meeting!</body>\n" +
+                "</note>";
 
     }
 
 
 
+    /**
+     *
+     * @param user
+     * @param request
+     * @return
+     * 指定返回数据格式为xml
+     */
+    @RequestMapping(value = "/testMime4",
+            produces = "text/xml;charset=utf-8")
+    public String testMime4(User user, HttpServletRequest request) {
+        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+                "<note>\n" +
+                "<to>George</to>\n" +
+                "<from>John</from>\n" +
+                "<heading>Reminder</heading>\n" +
+                "<body>Don't forget the meeting!</body>\n" +
+                "</note>";
+
+    }
+
+
+    @RequestMapping(value = "/testMime5",
+            produces = "application/pdf;charset=utf-8")
+    public String testMime5(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        File file = new File("/home/yangbing/book/test.pdf");
+
+        FileInputStream in = new FileInputStream(file);
+        byte[] bytes = new byte[1024];
+        int len = 0;
+        response.setContentType("application/pdf");
+        ServletOutputStream outputStream = response.getOutputStream();
+        while ((len = in.read(bytes)) > 0) {
+            outputStream.write(bytes, 0, len);
+        }
+        outputStream.close();
+        in.close();
+        return "123";
+
+    }
+
+
+    /**
+     * 返回多种数据类型
+     * @param user
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/testMime6",
+            produces = {"application/xml;charset=utf-8;q=1","text/html;q=0.5","application/json;q=0.6"})
+    public String testMime6(User user, HttpServletRequest request) {
+        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+                "<note>\n" +
+                "<to>George</to>\n" +
+                "<from>John</from>\n" +
+                "<heading>Reminder</heading>\n" +
+                "<body>Don't forget the meeting!</body>\n" +
+                "</note>";
+
+    }
 
 
 
