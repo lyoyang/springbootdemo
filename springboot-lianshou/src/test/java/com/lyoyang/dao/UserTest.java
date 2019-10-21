@@ -3,8 +3,12 @@ package com.lyoyang.dao;
 import com.lyoyang.ApplicationTests;
 import com.lyoyang.springbootlianshou.entities.User;
 import com.lyoyang.springbootlianshou.mapper.UserMapper;
+import com.lyoyang.springbootlianshou.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+
+import javax.annotation.Resource;
 
 /**
  * @Auther: yangbing
@@ -15,6 +19,9 @@ public class UserTest extends ApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Resource
+    private UserService userService;
 
 
     @Test
@@ -31,8 +38,12 @@ public class UserTest extends ApplicationTests {
     }
 
     @Test
-    public void test_copy() {
-        System.out.println(123);
+    public void test_addUser() {
+        User user = new User();
+        user.setName("bob");
+        user.setState("1");
+        user.setBirthday("2019-08-28");
+        userService.addUserInfo(user);
     }
 
 }

@@ -30,11 +30,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/main.html").setViewName("dashboard");
             }
 
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/user/login","/","/index.html","/webjars/**","/asserts/**");
-            }
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
+//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+//                        .excludePathPatterns("/user/login","/","/index.html","/webjars/**","/asserts/**");
+//            }
         };
         return adapter;
     }
