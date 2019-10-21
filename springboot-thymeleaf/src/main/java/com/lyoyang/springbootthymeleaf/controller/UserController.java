@@ -2,6 +2,10 @@ package com.lyoyang.springbootthymeleaf.controller;
 
 
 import com.lyoyang.springbootthymeleaf.entity.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,8 +15,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
+@Api("用户接口")
 public class UserController {
-
+    @ApiOperation("获取用户列表")
     @RequestMapping("/userList")
     public ModelAndView userList(){
         List<User> list = new ArrayList<User>();
@@ -26,8 +31,17 @@ public class UserController {
         return modelAndView;
     }
 
+    @ApiOperation("用户视图获取")
     @RequestMapping("/userView")
     public String userView() {
         return "userView";
+    }
+
+
+    @ApiOperation("获取用户详情")
+    @ApiImplicitParam(name = "name", value = "用户名")
+    @RequestMapping("/getUserInfo")
+    public String getUserInfo(String name) {
+        return name;
     }
 }
