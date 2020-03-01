@@ -1,19 +1,19 @@
-dubbo:
-  application:
-    name: user-service-provider
+#dubbo:
+#  application:
+#    name: user-service-provider
 #  registry:
-#    address: 127.0.0.1:2181
+#    address: dubbo.register.address
 #    protocol: zookeeper
 #    check: false
-  config-center: zookeeper://127.0.0.1:2181
-  protocol:
-    name: dubbo
-    port: 20880
-  monitor:
-    protocol: registry
-  provider:
-    timeout: 3000
-    group: mygroup
-#  scan:
-#    base-packages: com.lyoyang.api.impl
-debug: true
+##  config-center: zookeeper://127.0.0.1:2181
+#  protocol:
+#    name: dubbo
+#    port: 20880
+#  monitor:
+#    protocol: registry
+#  provider:
+#    timeout: 3000
+#    group: mygroup
+##  scan:
+##    base-packages: com.lyoyang.api.impl
+#debug: true
