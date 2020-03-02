@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 @Configuration
 public class SecureConfig extends WebSecurityConfigurerAdapter {
@@ -55,4 +57,6 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService);
         auth.authenticationProvider(ahthenAuthenticationProvider());
     }
+
+
 }

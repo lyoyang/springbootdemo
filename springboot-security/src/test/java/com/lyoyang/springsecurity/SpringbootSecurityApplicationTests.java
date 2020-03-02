@@ -1,4 +1,4 @@
-package com.lyoyang.springbootsecurity;
+package com.lyoyang.springsecurity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
