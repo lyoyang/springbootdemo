@@ -1,10 +1,12 @@
 package com.lyoyang.springsecurity.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Manager implements UserDetails {
     private Integer id;
@@ -92,4 +94,15 @@ public class Manager implements UserDetails {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+
+    @Override
+    public int hashCode() {
+        return this.username.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Manager ? this.username.equals(((Manager) obj).getUsername()) : false;
+    }
+
 }

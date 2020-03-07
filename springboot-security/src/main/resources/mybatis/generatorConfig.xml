@@ -11,21 +11,26 @@
         </commentGenerator>
 
         <!-- 数据库连接配置 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/security"
-                        userId="root" password="root"/>
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/security"-->
+                        <!--userId="root" password="root"/>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.103.98:3306/ceshi"
+                        userId="root" password="$root@ipaynow_test"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 
         <!-- domain配置 -->
-        <javaModelGenerator targetPackage="com.lyoyang.entity" targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <javaModelGenerator targetPackage="com.lyoyang.springsecurity.entity" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/mybatis"/>
         <!-- 生成DAO的类文件以及配置文件 trans_smlpay_ex-->
-        <javaClientGenerator targetPackage="com.lyoyang.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.lyoyang.springsecurity.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
 
-        <table schema="" tableName="manager" domainObjectName="Manager">
+        <!--<table schema="" tableName="manager" domainObjectName="Manager">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <table schema="" tableName="persistent_logins" domainObjectName="PersistentLogins">
             <property name="useActualColumnNames" value="false"/>
         </table>
 
