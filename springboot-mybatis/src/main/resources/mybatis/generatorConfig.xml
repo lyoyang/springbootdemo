@@ -12,7 +12,7 @@
 
         <!-- 数据库连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"
-                        userId="root" password="yang2826"/>
+                        userId="root" password="root"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
@@ -20,12 +20,24 @@
 
         <!-- domain配置 -->
         <javaModelGenerator targetPackage="com.lyoyang.entity" targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/mybatis/mapper"/>
         <!-- 生成DAO的类文件以及配置文件 trans_smlpay_ex-->
         <javaClientGenerator targetPackage="com.lyoyang.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
 
-        <table schema="" tableName="student" domainObjectName="Student">
+        <!--<table schema="" tableName="student" domainObjectName="Student">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table schema="" tableName="account" domainObjectName="Account">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <!--<table schema="" tableName="account_isam" domainObjectName="AccountIsam">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+
+        <table schema="" tableName="calculation_unstatistical" domainObjectName="CalculationUnStatistical">
             <property name="useActualColumnNames" value="false"/>
         </table>
 

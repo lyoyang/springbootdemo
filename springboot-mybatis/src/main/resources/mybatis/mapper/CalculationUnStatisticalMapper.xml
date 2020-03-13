@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lyoyang.mapper.CalculationUnStatisticalMapper" >
+  <resultMap id="BaseResultMap" type="com.lyoyang.entity.CalculationUnStatistical" >
+    <id column="TRANS_ID" property="transId" jdbcType="VARCHAR" />
+    <result column="TRANS_DATE" property="transDate" jdbcType="TIMESTAMP" />
+    <result column="MCH_ID" property="mchId" jdbcType="VARCHAR" />
+    <result column="DEVICE_ID" property="deviceId" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+    <result column="TRANS_TYPE" property="transType" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="FEE" property="fee" jdbcType="DECIMAL" />
+    <result column="SETTLE_AMOUNT" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="IPAYNOW_AMOUNT" property="ipaynowAmount" jdbcType="DECIMAL" />
+    <result column="SP_FEE" property="spFee" jdbcType="DECIMAL" />
+    <result column="SETTLE_FLAG" property="settleFlag" jdbcType="VARCHAR" />
+    <result column="ACC_DATE" property="accDate" jdbcType="VARCHAR" />
+    <result column="SETTLE_DATE" property="settleDate" jdbcType="VARCHAR" />
+    <result column="DAY_COUNT_STATUS" property="dayCountStatus" jdbcType="VARCHAR" />
+    <result column="SP_MID" property="spMid" jdbcType="VARCHAR" />
+    <result column="SUB_MCH_ID" property="subMchId" jdbcType="VARCHAR" />
+    <result column="IS_TRANSFERED" property="isTransfered" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="TRANS_STATUS" property="transStatus" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ROUTER_TYPE_ID" property="routerTypeId" jdbcType="VARCHAR" />
+    <result column="CHANNEL_TRANS_ID" property="channelTransId" jdbcType="VARCHAR" />
+    <result column="IS_SEND_RSMQ" property="isSendRsmq" jdbcType="VARCHAR" />
+    <result column="IPAYNOW_REBATE_MCH" property="ipaynowRebateMch" jdbcType="DECIMAL" />
+    <result column="BANK_REBATE_IPAYNOW" property="bankRebateIpaynow" jdbcType="DECIMAL" />
+    <result column="BANK_PROFIT" property="bankProfit" jdbcType="DECIMAL" />
+    <result column="BANK_COST" property="bankCost" jdbcType="DECIMAL" />
+    <result column="SETTLE_AMOUNT_CHANNEL" property="settleAmountChannel" jdbcType="DECIMAL" />
+    <result column="FEE_CHANNEL" property="feeChannel" jdbcType="DECIMAL" />
+    <result column="FEE_RATIO" property="feeRatio" jdbcType="DECIMAL" />
+    <result column="FEE_SETTLE_DATE" property="feeSettleDate" jdbcType="VARCHAR" />
+    <result column="FEE_MODE" property="feeMode" jdbcType="VARCHAR" />
+    <result column="FEE_STRATEGY" property="feeStrategy" jdbcType="VARCHAR" />
+    <result column="SUB_TRANS_TYPE" property="subTransType" jdbcType="VARCHAR" />
+    <result column="CARD_TYPE" property="cardType" jdbcType="VARCHAR" />
+    <result column="CARD_BRAND" property="cardBrand" jdbcType="VARCHAR" />
+    <result column="DCC_MODE" property="dccMode" jdbcType="VARCHAR" />
+    <result column="STORE_ID" property="storeId" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_TRANS_ID" property="originalTransId" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_TRANS_DATE" property="originalTransDate" jdbcType="TIMESTAMP" />
+    <result column="MHT_SUB_MCH_ID" property="mhtSubMchId" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_AMOUNT" property="originalAmount" jdbcType="DECIMAL" />
+    <result column="BANK_REBATE_MCH" property="bankRebateMch" jdbcType="DECIMAL" />
+    <result column="CH_REAL_DISCOUNT_AMOUNT" property="chRealDiscountAmount" jdbcType="DECIMAL" />
+    <result column="CH_MCH_DISCOUNT_AMOUNT" property="chMchDiscountAmount" jdbcType="DECIMAL" />
+    <result column="CH_DISCOUNT_AMOUNT" property="chDiscountAmount" jdbcType="DECIMAL" />
+    <result column="IS_PROFIT_SHARE" property="isProfitShare" jdbcType="VARCHAR" />
+    <result column="SYN_SHARE_FLAG" property="synShareFlag" jdbcType="VARCHAR" />
+    <result column="SUB_DEVICE_ID" property="subDeviceId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CH_ACC_DATE" property="chAccDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TRANS_ID, TRANS_DATE, MCH_ID, DEVICE_ID, CHANNEL_ID, TRANS_TYPE, AMOUNT, FEE, SETTLE_AMOUNT, 
+    IPAYNOW_AMOUNT, SP_FEE, SETTLE_FLAG, ACC_DATE, SETTLE_DATE, DAY_COUNT_STATUS, SP_MID, 
+    SUB_MCH_ID, IS_TRANSFERED, CREATE_DATE, TRANS_STATUS, REMARK, ROUTER_TYPE_ID, CHANNEL_TRANS_ID, 
+    IS_SEND_RSMQ, IPAYNOW_REBATE_MCH, BANK_REBATE_IPAYNOW, BANK_PROFIT, BANK_COST, SETTLE_AMOUNT_CHANNEL, 
+    FEE_CHANNEL, FEE_RATIO, FEE_SETTLE_DATE, FEE_MODE, FEE_STRATEGY, SUB_TRANS_TYPE, 
+    CARD_TYPE, CARD_BRAND, DCC_MODE, STORE_ID, ORIGINAL_TRANS_ID, ORIGINAL_TRANS_DATE, 
+    MHT_SUB_MCH_ID, ORIGINAL_AMOUNT, BANK_REBATE_MCH, CH_REAL_DISCOUNT_AMOUNT, CH_MCH_DISCOUNT_AMOUNT, 
+    CH_DISCOUNT_AMOUNT, IS_PROFIT_SHARE, SYN_SHARE_FLAG, SUB_DEVICE_ID, CREATE_TIME, 
+    CH_ACC_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lyoyang.entity.CalculationUnStatisticalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from calculation_unstatistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from calculation_unstatistical
+    where TRANS_ID = #{transId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from calculation_unstatistical
+    where TRANS_ID = #{transId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lyoyang.entity.CalculationUnStatisticalExample" >
+    delete from calculation_unstatistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lyoyang.entity.CalculationUnStatistical" >
+    insert into calculation_unstatistical (TRANS_ID, TRANS_DATE, MCH_ID, 
+      DEVICE_ID, CHANNEL_ID, TRANS_TYPE, 
+      AMOUNT, FEE, SETTLE_AMOUNT, 
+      IPAYNOW_AMOUNT, SP_FEE, SETTLE_FLAG, 
+      ACC_DATE, SETTLE_DATE, DAY_COUNT_STATUS, 
+      SP_MID, SUB_MCH_ID, IS_TRANSFERED, 
+      CREATE_DATE, TRANS_STATUS, REMARK, 
+      ROUTER_TYPE_ID, CHANNEL_TRANS_ID, IS_SEND_RSMQ, 
+      IPAYNOW_REBATE_MCH, BANK_REBATE_IPAYNOW, BANK_PROFIT, 
+      BANK_COST, SETTLE_AMOUNT_CHANNEL, FEE_CHANNEL, 
+      FEE_RATIO, FEE_SETTLE_DATE, FEE_MODE, 
+      FEE_STRATEGY, SUB_TRANS_TYPE, CARD_TYPE, 
+      CARD_BRAND, DCC_MODE, STORE_ID, 
+      ORIGINAL_TRANS_ID, ORIGINAL_TRANS_DATE, MHT_SUB_MCH_ID, 
+      ORIGINAL_AMOUNT, BANK_REBATE_MCH, CH_REAL_DISCOUNT_AMOUNT, 
+      CH_MCH_DISCOUNT_AMOUNT, CH_DISCOUNT_AMOUNT, 
+      IS_PROFIT_SHARE, SYN_SHARE_FLAG, SUB_DEVICE_ID, 
+      CREATE_TIME, CH_ACC_DATE)
+    values (#{transId,jdbcType=VARCHAR}, #{transDate,jdbcType=TIMESTAMP}, #{mchId,jdbcType=VARCHAR}, 
+      #{deviceId,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{transType,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{fee,jdbcType=DECIMAL}, #{settleAmount,jdbcType=DECIMAL}, 
+      #{ipaynowAmount,jdbcType=DECIMAL}, #{spFee,jdbcType=DECIMAL}, #{settleFlag,jdbcType=VARCHAR}, 
+      #{accDate,jdbcType=VARCHAR}, #{settleDate,jdbcType=VARCHAR}, #{dayCountStatus,jdbcType=VARCHAR}, 
+      #{spMid,jdbcType=VARCHAR}, #{subMchId,jdbcType=VARCHAR}, #{isTransfered,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{transStatus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{routerTypeId,jdbcType=VARCHAR}, #{channelTransId,jdbcType=VARCHAR}, #{isSendRsmq,jdbcType=VARCHAR}, 
+      #{ipaynowRebateMch,jdbcType=DECIMAL}, #{bankRebateIpaynow,jdbcType=DECIMAL}, #{bankProfit,jdbcType=DECIMAL}, 
+      #{bankCost,jdbcType=DECIMAL}, #{settleAmountChannel,jdbcType=DECIMAL}, #{feeChannel,jdbcType=DECIMAL}, 
+      #{feeRatio,jdbcType=DECIMAL}, #{feeSettleDate,jdbcType=VARCHAR}, #{feeMode,jdbcType=VARCHAR}, 
+      #{feeStrategy,jdbcType=VARCHAR}, #{subTransType,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{cardBrand,jdbcType=VARCHAR}, #{dccMode,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}, 
+      #{originalTransId,jdbcType=VARCHAR}, #{originalTransDate,jdbcType=TIMESTAMP}, #{mhtSubMchId,jdbcType=VARCHAR}, 
+      #{originalAmount,jdbcType=DECIMAL}, #{bankRebateMch,jdbcType=DECIMAL}, #{chRealDiscountAmount,jdbcType=DECIMAL}, 
+      #{chMchDiscountAmount,jdbcType=DECIMAL}, #{chDiscountAmount,jdbcType=DECIMAL}, 
+      #{isProfitShare,jdbcType=VARCHAR}, #{synShareFlag,jdbcType=VARCHAR}, #{subDeviceId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{chAccDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyoyang.entity.CalculationUnStatistical" >
+    insert into calculation_unstatistical
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transId != null" >
+        TRANS_ID,
+      </if>
+      <if test="transDate != null" >
+        TRANS_DATE,
+      </if>
+      <if test="mchId != null" >
+        MCH_ID,
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID,
+      </if>
+      <if test="transType != null" >
+        TRANS_TYPE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="fee != null" >
+        FEE,
+      </if>
+      <if test="settleAmount != null" >
+        SETTLE_AMOUNT,
+      </if>
+      <if test="ipaynowAmount != null" >
+        IPAYNOW_AMOUNT,
+      </if>
+      <if test="spFee != null" >
+        SP_FEE,
+      </if>
+      <if test="settleFlag != null" >
+        SETTLE_FLAG,
+      </if>
+      <if test="accDate != null" >
+        ACC_DATE,
+      </if>
+      <if test="settleDate != null" >
+        SETTLE_DATE,
+      </if>
+      <if test="dayCountStatus != null" >
+        DAY_COUNT_STATUS,
+      </if>
+      <if test="spMid != null" >
+        SP_MID,
+      </if>
+      <if test="subMchId != null" >
+        SUB_MCH_ID,
+      </if>
+      <if test="isTransfered != null" >
+        IS_TRANSFERED,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="transStatus != null" >
+        TRANS_STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="routerTypeId != null" >
+        ROUTER_TYPE_ID,
+      </if>
+      <if test="channelTransId != null" >
+        CHANNEL_TRANS_ID,
+      </if>
+      <if test="isSendRsmq != null" >
+        IS_SEND_RSMQ,
+      </if>
+      <if test="ipaynowRebateMch != null" >
+        IPAYNOW_REBATE_MCH,
+      </if>
+      <if test="bankRebateIpaynow != null" >
+        BANK_REBATE_IPAYNOW,
+      </if>
+      <if test="bankProfit != null" >
+        BANK_PROFIT,
+      </if>
+      <if test="bankCost != null" >
+        BANK_COST,
+      </if>
+      <if test="settleAmountChannel != null" >
+        SETTLE_AMOUNT_CHANNEL,
+      </if>
+      <if test="feeChannel != null" >
+        FEE_CHANNEL,
+      </if>
+      <if test="feeRatio != null" >
+        FEE_RATIO,
+      </if>
+      <if test="feeSettleDate != null" >
+        FEE_SETTLE_DATE,
+      </if>
+      <if test="feeMode != null" >
+        FEE_MODE,
+      </if>
+      <if test="feeStrategy != null" >
+        FEE_STRATEGY,
+      </if>
+      <if test="subTransType != null" >
+        SUB_TRANS_TYPE,
+      </if>
+      <if test="cardType != null" >
+        CARD_TYPE,
+      </if>
+      <if test="cardBrand != null" >
+        CARD_BRAND,
+      </if>
+      <if test="dccMode != null" >
+        DCC_MODE,
+      </if>
+      <if test="storeId != null" >
+        STORE_ID,
+      </if>
+      <if test="originalTransId != null" >
+        ORIGINAL_TRANS_ID,
+      </if>
+      <if test="originalTransDate != null" >
+        ORIGINAL_TRANS_DATE,
+      </if>
+      <if test="mhtSubMchId != null" >
+        MHT_SUB_MCH_ID,
+      </if>
+      <if test="originalAmount != null" >
+        ORIGINAL_AMOUNT,
+      </if>
+      <if test="bankRebateMch != null" >
+        BANK_REBATE_MCH,
+      </if>
+      <if test="chRealDiscountAmount != null" >
+        CH_REAL_DISCOUNT_AMOUNT,
+      </if>
+      <if test="chMchDiscountAmount != null" >
+        CH_MCH_DISCOUNT_AMOUNT,
+      </if>
+      <if test="chDiscountAmount != null" >
+        CH_DISCOUNT_AMOUNT,
+      </if>
+      <if test="isProfitShare != null" >
+        IS_PROFIT_SHARE,
+      </if>
+      <if test="synShareFlag != null" >
+        SYN_SHARE_FLAG,
+      </if>
+      <if test="subDeviceId != null" >
+        SUB_DEVICE_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="chAccDate != null" >
+        CH_ACC_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transId != null" >
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null" >
+        #{transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mchId != null" >
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null" >
+        #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="settleAmount != null" >
+        #{settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="ipaynowAmount != null" >
+        #{ipaynowAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="spFee != null" >
+        #{spFee,jdbcType=DECIMAL},
+      </if>
+      <if test="settleFlag != null" >
+        #{settleFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="accDate != null" >
+        #{accDate,jdbcType=VARCHAR},
+      </if>
+      <if test="settleDate != null" >
+        #{settleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dayCountStatus != null" >
+        #{dayCountStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="spMid != null" >
+        #{spMid,jdbcType=VARCHAR},
+      </if>
+      <if test="subMchId != null" >
+        #{subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="isTransfered != null" >
+        #{isTransfered,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transStatus != null" >
+        #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="routerTypeId != null" >
+        #{routerTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTransId != null" >
+        #{channelTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendRsmq != null" >
+        #{isSendRsmq,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaynowRebateMch != null" >
+        #{ipaynowRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="bankRebateIpaynow != null" >
+        #{bankRebateIpaynow,jdbcType=DECIMAL},
+      </if>
+      <if test="bankProfit != null" >
+        #{bankProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="bankCost != null" >
+        #{bankCost,jdbcType=DECIMAL},
+      </if>
+      <if test="settleAmountChannel != null" >
+        #{settleAmountChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="feeChannel != null" >
+        #{feeChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="feeRatio != null" >
+        #{feeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="feeSettleDate != null" >
+        #{feeSettleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="feeMode != null" >
+        #{feeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeStrategy != null" >
+        #{feeStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="subTransType != null" >
+        #{subTransType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBrand != null" >
+        #{cardBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="dccMode != null" >
+        #{dccMode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTransId != null" >
+        #{originalTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTransDate != null" >
+        #{originalTransDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mhtSubMchId != null" >
+        #{mhtSubMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalAmount != null" >
+        #{originalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bankRebateMch != null" >
+        #{bankRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="chRealDiscountAmount != null" >
+        #{chRealDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chMchDiscountAmount != null" >
+        #{chMchDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chDiscountAmount != null" >
+        #{chDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isProfitShare != null" >
+        #{isProfitShare,jdbcType=VARCHAR},
+      </if>
+      <if test="synShareFlag != null" >
+        #{synShareFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="subDeviceId != null" >
+        #{subDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="chAccDate != null" >
+        #{chAccDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lyoyang.entity.CalculationUnStatisticalExample" resultType="java.lang.Integer" >
+    select count(*) from calculation_unstatistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update calculation_unstatistical
+    <set >
+      <if test="record.transId != null" >
+        TRANS_ID = #{record.transId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transDate != null" >
+        TRANS_DATE = #{record.transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mchId != null" >
+        MCH_ID = #{record.mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceId != null" >
+        DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelId != null" >
+        CHANNEL_ID = #{record.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transType != null" >
+        TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fee != null" >
+        FEE = #{record.fee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.settleAmount != null" >
+        SETTLE_AMOUNT = #{record.settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ipaynowAmount != null" >
+        IPAYNOW_AMOUNT = #{record.ipaynowAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.spFee != null" >
+        SP_FEE = #{record.spFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.settleFlag != null" >
+        SETTLE_FLAG = #{record.settleFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accDate != null" >
+        ACC_DATE = #{record.accDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleDate != null" >
+        SETTLE_DATE = #{record.settleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayCountStatus != null" >
+        DAY_COUNT_STATUS = #{record.dayCountStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spMid != null" >
+        SP_MID = #{record.spMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subMchId != null" >
+        SUB_MCH_ID = #{record.subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTransfered != null" >
+        IS_TRANSFERED = #{record.isTransfered,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.transStatus != null" >
+        TRANS_STATUS = #{record.transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routerTypeId != null" >
+        ROUTER_TYPE_ID = #{record.routerTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelTransId != null" >
+        CHANNEL_TRANS_ID = #{record.channelTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSendRsmq != null" >
+        IS_SEND_RSMQ = #{record.isSendRsmq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipaynowRebateMch != null" >
+        IPAYNOW_REBATE_MCH = #{record.ipaynowRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankRebateIpaynow != null" >
+        BANK_REBATE_IPAYNOW = #{record.bankRebateIpaynow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankProfit != null" >
+        BANK_PROFIT = #{record.bankProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankCost != null" >
+        BANK_COST = #{record.bankCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.settleAmountChannel != null" >
+        SETTLE_AMOUNT_CHANNEL = #{record.settleAmountChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feeChannel != null" >
+        FEE_CHANNEL = #{record.feeChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feeRatio != null" >
+        FEE_RATIO = #{record.feeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feeSettleDate != null" >
+        FEE_SETTLE_DATE = #{record.feeSettleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeMode != null" >
+        FEE_MODE = #{record.feeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeStrategy != null" >
+        FEE_STRATEGY = #{record.feeStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subTransType != null" >
+        SUB_TRANS_TYPE = #{record.subTransType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null" >
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardBrand != null" >
+        CARD_BRAND = #{record.cardBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dccMode != null" >
+        DCC_MODE = #{record.dccMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeId != null" >
+        STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalTransId != null" >
+        ORIGINAL_TRANS_ID = #{record.originalTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalTransDate != null" >
+        ORIGINAL_TRANS_DATE = #{record.originalTransDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mhtSubMchId != null" >
+        MHT_SUB_MCH_ID = #{record.mhtSubMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalAmount != null" >
+        ORIGINAL_AMOUNT = #{record.originalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankRebateMch != null" >
+        BANK_REBATE_MCH = #{record.bankRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chRealDiscountAmount != null" >
+        CH_REAL_DISCOUNT_AMOUNT = #{record.chRealDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chMchDiscountAmount != null" >
+        CH_MCH_DISCOUNT_AMOUNT = #{record.chMchDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chDiscountAmount != null" >
+        CH_DISCOUNT_AMOUNT = #{record.chDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isProfitShare != null" >
+        IS_PROFIT_SHARE = #{record.isProfitShare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synShareFlag != null" >
+        SYN_SHARE_FLAG = #{record.synShareFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subDeviceId != null" >
+        SUB_DEVICE_ID = #{record.subDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chAccDate != null" >
+        CH_ACC_DATE = #{record.chAccDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update calculation_unstatistical
+    set TRANS_ID = #{record.transId,jdbcType=VARCHAR},
+      TRANS_DATE = #{record.transDate,jdbcType=TIMESTAMP},
+      MCH_ID = #{record.mchId,jdbcType=VARCHAR},
+      DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      CHANNEL_ID = #{record.channelId,jdbcType=VARCHAR},
+      TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      FEE = #{record.fee,jdbcType=DECIMAL},
+      SETTLE_AMOUNT = #{record.settleAmount,jdbcType=DECIMAL},
+      IPAYNOW_AMOUNT = #{record.ipaynowAmount,jdbcType=DECIMAL},
+      SP_FEE = #{record.spFee,jdbcType=DECIMAL},
+      SETTLE_FLAG = #{record.settleFlag,jdbcType=VARCHAR},
+      ACC_DATE = #{record.accDate,jdbcType=VARCHAR},
+      SETTLE_DATE = #{record.settleDate,jdbcType=VARCHAR},
+      DAY_COUNT_STATUS = #{record.dayCountStatus,jdbcType=VARCHAR},
+      SP_MID = #{record.spMid,jdbcType=VARCHAR},
+      SUB_MCH_ID = #{record.subMchId,jdbcType=VARCHAR},
+      IS_TRANSFERED = #{record.isTransfered,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      TRANS_STATUS = #{record.transStatus,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ROUTER_TYPE_ID = #{record.routerTypeId,jdbcType=VARCHAR},
+      CHANNEL_TRANS_ID = #{record.channelTransId,jdbcType=VARCHAR},
+      IS_SEND_RSMQ = #{record.isSendRsmq,jdbcType=VARCHAR},
+      IPAYNOW_REBATE_MCH = #{record.ipaynowRebateMch,jdbcType=DECIMAL},
+      BANK_REBATE_IPAYNOW = #{record.bankRebateIpaynow,jdbcType=DECIMAL},
+      BANK_PROFIT = #{record.bankProfit,jdbcType=DECIMAL},
+      BANK_COST = #{record.bankCost,jdbcType=DECIMAL},
+      SETTLE_AMOUNT_CHANNEL = #{record.settleAmountChannel,jdbcType=DECIMAL},
+      FEE_CHANNEL = #{record.feeChannel,jdbcType=DECIMAL},
+      FEE_RATIO = #{record.feeRatio,jdbcType=DECIMAL},
+      FEE_SETTLE_DATE = #{record.feeSettleDate,jdbcType=VARCHAR},
+      FEE_MODE = #{record.feeMode,jdbcType=VARCHAR},
+      FEE_STRATEGY = #{record.feeStrategy,jdbcType=VARCHAR},
+      SUB_TRANS_TYPE = #{record.subTransType,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      CARD_BRAND = #{record.cardBrand,jdbcType=VARCHAR},
+      DCC_MODE = #{record.dccMode,jdbcType=VARCHAR},
+      STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      ORIGINAL_TRANS_ID = #{record.originalTransId,jdbcType=VARCHAR},
+      ORIGINAL_TRANS_DATE = #{record.originalTransDate,jdbcType=TIMESTAMP},
+      MHT_SUB_MCH_ID = #{record.mhtSubMchId,jdbcType=VARCHAR},
+      ORIGINAL_AMOUNT = #{record.originalAmount,jdbcType=DECIMAL},
+      BANK_REBATE_MCH = #{record.bankRebateMch,jdbcType=DECIMAL},
+      CH_REAL_DISCOUNT_AMOUNT = #{record.chRealDiscountAmount,jdbcType=DECIMAL},
+      CH_MCH_DISCOUNT_AMOUNT = #{record.chMchDiscountAmount,jdbcType=DECIMAL},
+      CH_DISCOUNT_AMOUNT = #{record.chDiscountAmount,jdbcType=DECIMAL},
+      IS_PROFIT_SHARE = #{record.isProfitShare,jdbcType=VARCHAR},
+      SYN_SHARE_FLAG = #{record.synShareFlag,jdbcType=VARCHAR},
+      SUB_DEVICE_ID = #{record.subDeviceId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      CH_ACC_DATE = #{record.chAccDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyoyang.entity.CalculationUnStatistical" >
+    update calculation_unstatistical
+    <set >
+      <if test="transDate != null" >
+        TRANS_DATE = #{transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mchId != null" >
+        MCH_ID = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null" >
+        TRANS_TYPE = #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null" >
+        FEE = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="settleAmount != null" >
+        SETTLE_AMOUNT = #{settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="ipaynowAmount != null" >
+        IPAYNOW_AMOUNT = #{ipaynowAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="spFee != null" >
+        SP_FEE = #{spFee,jdbcType=DECIMAL},
+      </if>
+      <if test="settleFlag != null" >
+        SETTLE_FLAG = #{settleFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="accDate != null" >
+        ACC_DATE = #{accDate,jdbcType=VARCHAR},
+      </if>
+      <if test="settleDate != null" >
+        SETTLE_DATE = #{settleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dayCountStatus != null" >
+        DAY_COUNT_STATUS = #{dayCountStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="spMid != null" >
+        SP_MID = #{spMid,jdbcType=VARCHAR},
+      </if>
+      <if test="subMchId != null" >
+        SUB_MCH_ID = #{subMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="isTransfered != null" >
+        IS_TRANSFERED = #{isTransfered,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transStatus != null" >
+        TRANS_STATUS = #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="routerTypeId != null" >
+        ROUTER_TYPE_ID = #{routerTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelTransId != null" >
+        CHANNEL_TRANS_ID = #{channelTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendRsmq != null" >
+        IS_SEND_RSMQ = #{isSendRsmq,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaynowRebateMch != null" >
+        IPAYNOW_REBATE_MCH = #{ipaynowRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="bankRebateIpaynow != null" >
+        BANK_REBATE_IPAYNOW = #{bankRebateIpaynow,jdbcType=DECIMAL},
+      </if>
+      <if test="bankProfit != null" >
+        BANK_PROFIT = #{bankProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="bankCost != null" >
+        BANK_COST = #{bankCost,jdbcType=DECIMAL},
+      </if>
+      <if test="settleAmountChannel != null" >
+        SETTLE_AMOUNT_CHANNEL = #{settleAmountChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="feeChannel != null" >
+        FEE_CHANNEL = #{feeChannel,jdbcType=DECIMAL},
+      </if>
+      <if test="feeRatio != null" >
+        FEE_RATIO = #{feeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="feeSettleDate != null" >
+        FEE_SETTLE_DATE = #{feeSettleDate,jdbcType=VARCHAR},
+      </if>
+      <if test="feeMode != null" >
+        FEE_MODE = #{feeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeStrategy != null" >
+        FEE_STRATEGY = #{feeStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="subTransType != null" >
+        SUB_TRANS_TYPE = #{subTransType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        CARD_TYPE = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBrand != null" >
+        CARD_BRAND = #{cardBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="dccMode != null" >
+        DCC_MODE = #{dccMode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        STORE_ID = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTransId != null" >
+        ORIGINAL_TRANS_ID = #{originalTransId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTransDate != null" >
+        ORIGINAL_TRANS_DATE = #{originalTransDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mhtSubMchId != null" >
+        MHT_SUB_MCH_ID = #{mhtSubMchId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalAmount != null" >
+        ORIGINAL_AMOUNT = #{originalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bankRebateMch != null" >
+        BANK_REBATE_MCH = #{bankRebateMch,jdbcType=DECIMAL},
+      </if>
+      <if test="chRealDiscountAmount != null" >
+        CH_REAL_DISCOUNT_AMOUNT = #{chRealDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chMchDiscountAmount != null" >
+        CH_MCH_DISCOUNT_AMOUNT = #{chMchDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chDiscountAmount != null" >
+        CH_DISCOUNT_AMOUNT = #{chDiscountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="isProfitShare != null" >
+        IS_PROFIT_SHARE = #{isProfitShare,jdbcType=VARCHAR},
+      </if>
+      <if test="synShareFlag != null" >
+        SYN_SHARE_FLAG = #{synShareFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="subDeviceId != null" >
+        SUB_DEVICE_ID = #{subDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="chAccDate != null" >
+        CH_ACC_DATE = #{chAccDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANS_ID = #{transId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyoyang.entity.CalculationUnStatistical" >
+    update calculation_unstatistical
+    set TRANS_DATE = #{transDate,jdbcType=TIMESTAMP},
+      MCH_ID = #{mchId,jdbcType=VARCHAR},
+      DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      CHANNEL_ID = #{channelId,jdbcType=VARCHAR},
+      TRANS_TYPE = #{transType,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      FEE = #{fee,jdbcType=DECIMAL},
+      SETTLE_AMOUNT = #{settleAmount,jdbcType=DECIMAL},
+      IPAYNOW_AMOUNT = #{ipaynowAmount,jdbcType=DECIMAL},
+      SP_FEE = #{spFee,jdbcType=DECIMAL},
+      SETTLE_FLAG = #{settleFlag,jdbcType=VARCHAR},
+      ACC_DATE = #{accDate,jdbcType=VARCHAR},
+      SETTLE_DATE = #{settleDate,jdbcType=VARCHAR},
+      DAY_COUNT_STATUS = #{dayCountStatus,jdbcType=VARCHAR},
+      SP_MID = #{spMid,jdbcType=VARCHAR},
+      SUB_MCH_ID = #{subMchId,jdbcType=VARCHAR},
+      IS_TRANSFERED = #{isTransfered,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      TRANS_STATUS = #{transStatus,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ROUTER_TYPE_ID = #{routerTypeId,jdbcType=VARCHAR},
+      CHANNEL_TRANS_ID = #{channelTransId,jdbcType=VARCHAR},
+      IS_SEND_RSMQ = #{isSendRsmq,jdbcType=VARCHAR},
+      IPAYNOW_REBATE_MCH = #{ipaynowRebateMch,jdbcType=DECIMAL},
+      BANK_REBATE_IPAYNOW = #{bankRebateIpaynow,jdbcType=DECIMAL},
+      BANK_PROFIT = #{bankProfit,jdbcType=DECIMAL},
+      BANK_COST = #{bankCost,jdbcType=DECIMAL},
+      SETTLE_AMOUNT_CHANNEL = #{settleAmountChannel,jdbcType=DECIMAL},
+      FEE_CHANNEL = #{feeChannel,jdbcType=DECIMAL},
+      FEE_RATIO = #{feeRatio,jdbcType=DECIMAL},
+      FEE_SETTLE_DATE = #{feeSettleDate,jdbcType=VARCHAR},
+      FEE_MODE = #{feeMode,jdbcType=VARCHAR},
+      FEE_STRATEGY = #{feeStrategy,jdbcType=VARCHAR},
+      SUB_TRANS_TYPE = #{subTransType,jdbcType=VARCHAR},
+      CARD_TYPE = #{cardType,jdbcType=VARCHAR},
+      CARD_BRAND = #{cardBrand,jdbcType=VARCHAR},
+      DCC_MODE = #{dccMode,jdbcType=VARCHAR},
+      STORE_ID = #{storeId,jdbcType=VARCHAR},
+      ORIGINAL_TRANS_ID = #{originalTransId,jdbcType=VARCHAR},
+      ORIGINAL_TRANS_DATE = #{originalTransDate,jdbcType=TIMESTAMP},
+      MHT_SUB_MCH_ID = #{mhtSubMchId,jdbcType=VARCHAR},
+      ORIGINAL_AMOUNT = #{originalAmount,jdbcType=DECIMAL},
+      BANK_REBATE_MCH = #{bankRebateMch,jdbcType=DECIMAL},
+      CH_REAL_DISCOUNT_AMOUNT = #{chRealDiscountAmount,jdbcType=DECIMAL},
+      CH_MCH_DISCOUNT_AMOUNT = #{chMchDiscountAmount,jdbcType=DECIMAL},
+      CH_DISCOUNT_AMOUNT = #{chDiscountAmount,jdbcType=DECIMAL},
+      IS_PROFIT_SHARE = #{isProfitShare,jdbcType=VARCHAR},
+      SYN_SHARE_FLAG = #{synShareFlag,jdbcType=VARCHAR},
+      SUB_DEVICE_ID = #{subDeviceId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      CH_ACC_DATE = #{chAccDate,jdbcType=VARCHAR}
+    where TRANS_ID = #{transId,jdbcType=VARCHAR}
+  </update>
+</mapper>
