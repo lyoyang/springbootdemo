@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.lyoyang</groupId>
-	<artifactId>security-oauth</artifactId>
+	<artifactId>spring-security-oauth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>security-oauth</name>
+	<name>spring-security-oauth</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
