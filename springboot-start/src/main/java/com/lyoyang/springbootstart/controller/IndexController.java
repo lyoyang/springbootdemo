@@ -135,7 +135,7 @@ public class IndexController {
             produces = "application/json;charset=UTF-8",
             headers = "a=1",
             consumes = "application/json")
-    public String testMime1(User user) {
+    public String testMime1(@RequestBody User user) {
         return JSONObject.toJSONString(user);
     }
 
@@ -150,13 +150,7 @@ public class IndexController {
     @RequestMapping(value = "/testMime2",
             headers = {"Accept=text/xml","Content-Type=application/json"})
     public String testMime2(User user, HttpServletRequest request) {
-        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
-                "<note>\n" +
-                "<to>George</to>\n" +
-                "<from>John</from>\n" +
-                "<heading>Reminder</heading>\n" +
-                "<body>Don't forget the meeting!</body>\n" +
-                "</note>";
+        return "123";
 
     }
 
@@ -171,14 +165,7 @@ public class IndexController {
     @RequestMapping(value = "/testMime3",
             produces = "application/xml;charset=utf-8")
     public String testMime3(User user, HttpServletRequest request) {
-        return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
-                "<note>\n" +
-                "<to>George</to>\n" +
-                "<from>John</from>\n" +
-                "<heading>Reminder</heading>\n" +
-                "<body>Don't forget the meeting!</body>\n" +
-                "</note>";
-
+        return "12343";
     }
 
 
@@ -241,13 +228,5 @@ public class IndexController {
                 "<heading>Reminder</heading>\n" +
                 "<body>Don't forget the meeting!</body>\n" +
                 "</note>";
-
     }
-
-
-
-
-
-
-
 }

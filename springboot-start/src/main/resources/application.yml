@@ -23,4 +23,4 @@ server:
 stu:
   name: jim
   age: 23
-debug: true
+#debug: true

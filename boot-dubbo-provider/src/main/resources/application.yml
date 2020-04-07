@@ -17,3 +17,4 @@ dubbo:
 #  scan:
 #    base-packages: com.lyoyang.api.impl
 debug: true
+

@@ -1,12 +1,12 @@
-package com.lyoyang;
+package com.lyoyang.springbootsecurity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootJsp2Application {
+public class SecurityApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootJsp2Application.class, args);
+		SpringApplication.run(SecurityApplication.class, args);
 	}
 }
