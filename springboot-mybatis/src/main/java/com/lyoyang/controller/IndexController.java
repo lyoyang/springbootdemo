@@ -6,10 +6,21 @@ package com.lyoyang.controller;
 //import com.lyoyang.mapper.EmployeeMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 @RestController
 public class IndexController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
 //    @Autowired
 //    private DepartmentMapper departmentMapper;
@@ -55,5 +66,19 @@ public class IndexController {
 //    public Employee getEmplById(Integer id) {
 //        return employeeMapper.getEmplById(id);
 //    }
+
+    @Autowired
+    private DataSource dataSource;
+
+    @RequestMapping("/index")
+    public String index() {
+        try {
+            Connection connection = dataSource.getConnection();
+            LOG.info("连接信息：" + connection);
+        } catch (SQLException e) {
+            LOG.error("异常", e);
+        }
+        return "index";
+    }
 
 }

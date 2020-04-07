@@ -3,8 +3,6 @@ package com.lyoyang.springbootlianshou.config;
 
 import com.lyoyang.springbootlianshou.component.LoginHandlerInterceptor;
 import com.lyoyang.springbootlianshou.component.MyLocaleResolver;
-import org.springframework.boot.web.server.WebServerFactory;
-import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -30,11 +28,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/main.html").setViewName("dashboard");
             }
 
-//            @Override
-//            public void addInterceptors(InterceptorRegistry registry) {
-//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-//                        .excludePathPatterns("/user/login","/","/index.html","/webjars/**","/asserts/**");
-//            }
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+                        .excludePathPatterns("/user/login","/","/index.html","/webjars/**","/asserts/**");
+            }
         };
         return adapter;
     }
