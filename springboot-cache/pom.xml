@@ -6,9 +6,6 @@
 	<groupId>com.lyoyang.cache</groupId>
 	<artifactId>springboot-cache</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>../../springdemo/springdemo</module>
-    </modules>
     <packaging>pom</packaging>
 
 	<name>springboot-cache</name>
