@@ -19,9 +19,9 @@ public class MyWebAuthenticationDetails extends WebAuthenticationDetails {
         super(request);
         String imageCode = request.getParameter("captcha");
         HttpSession session = request.getSession();
-        String savedImageCode = (String) session.getAttribute("captcha");
+        String savedImageCode = (String) session.getAttribute(session.getId());
         if (!StringUtils.isEmpty(savedImageCode)) {
-            session.removeAttribute("captcha");
+            session.removeAttribute(session.getId());
             if (!StringUtils.isEmpty(imageCode) && imageCode.equals(savedImageCode)) {
                 this.isVerificationCodeRight = true;
             }
