@@ -28,7 +28,7 @@ public class RocketMqProducer {
 
     @Bean
     public DefaultMQProducer defaultMQProducer() {
-        DefaultMQProducer producer = new DefaultMQProducer(groupName);
+        DefaultMQProducer producer = new DefaultMQProducer("GID_cleanMessage");
         producer.setNamesrvAddr(namesServer);
         producer.setMaxMessageSize(maxMessageSize);
         producer.setSendMsgTimeout(sendMsgTimeOut);
