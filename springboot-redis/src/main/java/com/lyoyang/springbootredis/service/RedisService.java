@@ -21,6 +21,7 @@ import redis.clients.jedis.JedisCommands;
 import redis.clients.jedis.Protocol;
 import redis.clients.util.SafeEncoder;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -146,4 +147,12 @@ public class RedisService {
 //        });
 //        return !StringUtils.isEmpty(result);
     }
+
+
+    public boolean tryLock(Object key, Object value) {
+        return redisTemplate.opsForValue().setIfAbsent(key, value, Duration.ofSeconds(20));
+    }
+
+
+
 }

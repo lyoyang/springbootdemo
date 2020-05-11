@@ -4,15 +4,20 @@ package com.lyoyang.springbootredis.controller;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lyoyang.springbootredis.entity.User;
+import com.lyoyang.springbootredis.service.RedisService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class IndexController {
+
+    @Resource
+    private RedisService redisService;
 
 //    @RequestMapping("/")
 //    public String index() {
@@ -36,4 +41,16 @@ public class IndexController {
 //        list.add(u5);
         return Maps.uniqueIndex(list, User::getId);
     }
+
+
+    @RequestMapping("/getInfo")
+    public String getInfo() {
+        boolean lock = redisService.tryLock("test", "test");
+        if (lock) {
+            return "Lock success";
+        }
+        return "Lock Fail";
+    }
+
+
 }
