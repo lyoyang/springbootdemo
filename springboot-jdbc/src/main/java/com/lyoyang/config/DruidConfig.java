@@ -21,7 +21,8 @@ public class DruidConfig {
     public DataSource dataSource() {
         return new DruidDataSource();
     }
-//    配置druid监控
+
+
     @Bean
     public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),"/druid/*");
@@ -32,6 +33,8 @@ public class DruidConfig {
         bean.setInitParameters(map);
         return bean;
     }
+
+
 
     @Bean
     public FilterRegistrationBean statFilter() {
