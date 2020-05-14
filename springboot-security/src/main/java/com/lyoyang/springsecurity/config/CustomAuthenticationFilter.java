@@ -20,14 +20,14 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         if (request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 || request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
 
-
-
             UsernamePasswordAuthenticationToken authRequest = null;
             try {
                 String jsonString = GetRequestJsonUtils.getPostRequestJsonString(request);
                 Manager selfUserDetails = JSONObject.parseObject(jsonString, Manager.class);
-                authRequest = new UsernamePasswordAuthenticationToken(
-                        selfUserDetails.getUsername(), selfUserDetails.getPassword());
+                JSONObject jsonObject = JSONObject.parseObject(jsonString);
+                request.setAttribute("captcha", jsonObject.get("captcha"));
+                authRequest = new UsernamePasswordAuthenticationToken(selfUserDetails.getUsername(),
+                        selfUserDetails.getPassword());
             } catch (Exception e) {
                 e.printStackTrace();
                 authRequest = new UsernamePasswordAuthenticationToken(
@@ -37,7 +37,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 return this.getAuthenticationManager().authenticate(authRequest);
             }
         }
-        //transmit it to UsernamePasswordAuthenticationFilter
         else {
             return super.attemptAuthentication(request, response);
         }

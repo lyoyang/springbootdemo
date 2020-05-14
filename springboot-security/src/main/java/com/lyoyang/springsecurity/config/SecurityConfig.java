@@ -1,9 +1,12 @@
 package com.lyoyang.springsecurity.config;
 
+import com.lyoyang.springsecurity.filter.JwtAuthenticationTokenFilter;
 import com.lyoyang.springsecurity.handler.MyAuthenticationFailureHandler;
+import com.lyoyang.springsecurity.handler.MyLoginSuccessHandler;
 import com.lyoyang.springsecurity.handler.MyLogoutSuccessHandler;
 import com.lyoyang.springsecurity.service.PersistentLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.devtools.restart.FailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.session.FindByIndexNameSessionRepository;
@@ -36,6 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private FindByIndexNameSessionRepository sessionRepository;
+
+
+    @Resource
+    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
 
     @Autowired
     private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> myWebauthenticationDetailsSource;
@@ -65,13 +74,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().cors().disable().csrf().disable()
                 .formLogin()
-                .authenticationDetailsSource(myWebauthenticationDetailsSource)
-                .loginPage("/login").loginProcessingUrl("/doLogin").permitAll()
+//                .authenticationDetailsSource(myWebauthenticationDetailsSource)
+                .loginPage("/login").permitAll()
                 .failureHandler(new MyAuthenticationFailureHandler())
                 .and().logout().logoutSuccessHandler(new MyLogoutSuccessHandler()).permitAll()
                 .and().rememberMe().tokenRepository(persistentLoginService).userDetailsService(userDetailsService)
                 .and().sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry());
+
+                http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 //                http.addFilterBefore(new VerificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+
+
+
+    @Bean
+    CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter filter = new CustomAuthenticationFilter();
+        filter.setAuthenticationSuccessHandler(new MyLoginSuccessHandler());
+        filter.setAuthenticationFailureHandler(new MyAuthenticationFailureHandler());
+        filter.setFilterProcessesUrl("/doLogin");
+        //这句很关键，重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己组装AuthenticationManager
+        filter.setAuthenticationManager(authenticationManagerBean());
+        filter.setAuthenticationDetailsSource(myWebauthenticationDetailsSource);
+        return filter;
     }
 
 
