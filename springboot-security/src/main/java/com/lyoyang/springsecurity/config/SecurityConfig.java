@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.devtools.restart.FailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
@@ -27,6 +32,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 
 @EnableWebSecurity
@@ -44,6 +50,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Resource
+    private MyLoginSuccessHandler myLoginSuccessHandler;
+
+    @Resource(name = "customSessionInformationExpiredStrategy")
+    private SessionInformationExpiredStrategy customSessionInformationExpiredStrategy;
+
+    @Resource
+    private DaoAuthenticationProvider myAuthenticationProvider;
 
 
     @Autowired
@@ -77,9 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authenticationDetailsSource(myWebauthenticationDetailsSource)
                 .loginPage("/login").permitAll()
                 .failureHandler(new MyAuthenticationFailureHandler())
-                .and().logout().logoutSuccessHandler(new MyLogoutSuccessHandler()).permitAll()
+                .and().logout().logoutUrl("/doLogout").logoutSuccessHandler(new MyLogoutSuccessHandler()).permitAll()
                 .and().rememberMe().tokenRepository(persistentLoginService).userDetailsService(userDetailsService)
-                .and().sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry());
+                .and().sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry()).expiredSessionStrategy(customSessionInformationExpiredStrategy);
 
                 http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -92,12 +107,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
         CustomAuthenticationFilter filter = new CustomAuthenticationFilter();
-        filter.setAuthenticationSuccessHandler(new MyLoginSuccessHandler());
+        filter.setAuthenticationSuccessHandler(myLoginSuccessHandler);
         filter.setAuthenticationFailureHandler(new MyAuthenticationFailureHandler());
         filter.setFilterProcessesUrl("/doLogin");
         //这句很关键，重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己组装AuthenticationManager
+        ProviderManager providerManager = new ProviderManager(Collections.singletonList(myAuthenticationProvider));
+        filter.setAuthenticationManager(providerManager);
         filter.setAuthenticationManager(authenticationManagerBean());
         filter.setAuthenticationDetailsSource(myWebauthenticationDetailsSource);
+        filter.setSessionAuthenticationStrategy(new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry()));
         return filter;
     }
 

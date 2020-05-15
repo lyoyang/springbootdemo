@@ -2,6 +2,7 @@ package com.lyoyang.springsecurity.config;
 
 import com.lyoyang.springsecurity.exception.VerificationCodeException;
 import com.lyoyang.springsecurity.service.CustomerUserDetailService;
+import com.lyoyang.springsecurity.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

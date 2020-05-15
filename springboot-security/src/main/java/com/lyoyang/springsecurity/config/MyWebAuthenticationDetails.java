@@ -21,6 +21,9 @@ public class MyWebAuthenticationDetails extends WebAuthenticationDetails {
         super(request);
 //        String imageCode = jsonObject.getString("captcha");
         String imageCode = (String) request.getAttribute("captcha");
+        if (StringUtils.isEmpty(imageCode)) {
+            imageCode = request.getParameter("captcha");
+        }
         HttpSession session = request.getSession();
         String savedImageCode = (String) session.getAttribute(session.getId());
         if (!StringUtils.isEmpty(savedImageCode)) {

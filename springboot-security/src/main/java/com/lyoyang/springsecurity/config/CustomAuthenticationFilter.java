@@ -36,8 +36,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 setDetails(request, authRequest);
                 return this.getAuthenticationManager().authenticate(authRequest);
             }
-        }
-        else {
+        } else {
             return super.attemptAuthentication(request, response);
         }
     }

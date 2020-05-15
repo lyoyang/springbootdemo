@@ -24,11 +24,10 @@ public class CaptchaController {
 
 
     @RequestMapping("/captcha.jpg")
-    public void getCaptcha(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException {
+    public void getCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("image/jpeg");
         String text = captchaProducer.createText();
-        httpSession.setAttribute(httpSession.getId(), text);
-//        request.getSession().setAttribute("captcha", text);
+        request.getSession().setAttribute(request.getSession().getId(), text);
         BufferedImage image = captchaProducer.createImage(text);
         ServletOutputStream outputStream = response.getOutputStream();
         ImageIO.write(image, "jpg", outputStream);

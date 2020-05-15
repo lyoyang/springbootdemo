@@ -8,9 +8,12 @@ import com.lyoyang.springsecurity.entity.Manager;
 import com.lyoyang.springsecurity.service.CommonService;
 import com.lyoyang.springsecurity.service.ManagerService;
 import com.lyoyang.springsecurity.service.RedisService;
+import io.jsonwebtoken.lang.Strings;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -55,7 +58,7 @@ public class CommonServiceImpl implements CommonService {
         Optional<Manager> userInfo = managerService.getManagerByName(userName);
         if (userInfo.isPresent()) {
         return Optional.of(UserDetailsResponseDto.builder().userId(userInfo.get().getId()).userName(userInfo.get().getUsername())
-                .enable(userInfo.get().getEnable()).userEmail(userName)
+                .enable(userInfo.get().getEnable()).userEmail(userName).roleIds(Arrays.asList(userInfo.get().getRoles().split(",")))
                 .build());
         }
         return Optional.empty();

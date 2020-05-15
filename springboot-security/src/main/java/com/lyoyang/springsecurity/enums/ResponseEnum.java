@@ -32,6 +32,7 @@ public enum ResponseEnum {
 
     UNAUTHORIZED("A0301", "访问未授权"),
     LOGIN_TIMEOUT("A0230", "请重新登录"),
+    SESSION_EXPIRED("B0001", "token失效，请重新登录"),
 
     ROLE_ID_EXISTS("R0001", "角色ID已存在");
 
