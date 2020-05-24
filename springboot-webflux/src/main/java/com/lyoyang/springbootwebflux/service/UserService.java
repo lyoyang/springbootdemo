@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private static List<UserModel> userModels;
+    private static List<UserModel> userModels = new ArrayList<>();
 
     static {
         userModels.add(UserModel.builder().id("1").name("alice").build());
