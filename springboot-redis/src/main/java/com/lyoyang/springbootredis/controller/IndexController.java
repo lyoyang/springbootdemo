@@ -52,5 +52,12 @@ public class IndexController {
         return "Lock Fail";
     }
 
+    @RequestMapping("/get")
+    public Long get() {
+        return redisService.getAndIncrement();
+    }
+
+
+
 
 }

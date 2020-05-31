@@ -154,5 +154,11 @@ public class RedisService {
     }
 
 
+    public Long getAndIncrement() {
+        return redisTemplate.opsForValue().increment("score");
+    }
+
+
+
 
 }
