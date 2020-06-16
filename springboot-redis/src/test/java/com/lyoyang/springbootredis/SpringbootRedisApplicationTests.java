@@ -1,8 +1,12 @@
 package com.lyoyang.springbootredis;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.lyoyang.springbootredis.entity.FeeConfig;
 import com.lyoyang.springbootredis.entity.User;
 import com.lyoyang.springbootredis.service.RedisService;
+import org.apache.commons.lang.StringUtils;
+import org.assertj.core.util.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,9 +90,53 @@ public class SpringbootRedisApplicationTests {
 
 	@Test
 	public void testLock() {
-//		for(int i = 0; i<1000; i++) {
-//			new Thread(new MyThread(i)).start();
+		String subKey = "mch_fee";
+		FeeConfig feeConfig = new FeeConfig();
+		feeConfig.setMchId("0000566554");
+		feeConfig.setChannelId("12");
+		feeConfig.setDeviceId("0600");
+		feeConfig.setTransType("05");
+		feeConfig.setRatioValue(new BigDecimal("433"));
+		feeConfig.setCardType("01");
+		feeConfig.setBelongBank("01");
+		feeConfig.setDeviceType("02");
+		String key = buildMchFeeKey(feeConfig);
+		FeeConfig queryData = (FeeConfig) redisService.get(key, subKey);
+		if (queryData == null) {
+			redisService.putObject(key, subKey, feeConfig, 10);
+		}
+	}
+
+
+
+	private String buildMchFeeKey(FeeConfig param) {
+		StringBuilder key = new StringBuilder();
+		if (StringUtils.isNotEmpty(param.getMchId())) {
+			key.append(param.getMchId());
+		}
+		if (StringUtils.isNotEmpty(param.getChannelId())) {
+			key.append(param.getChannelId());
+		}
+		if (StringUtils.isNotEmpty(param.getDeviceId())) {
+			key.append(param.getDeviceId());
+		}
+//		if (StringUtils.isNotEmpty(param.getSubDeviceId())) {
+//			key.append(param.getSubDeviceId());
 //		}
+		if (StringUtils.isNotEmpty(param.getTransType())) {
+			key.append(param.getTransType());
+		}
+		if (StringUtils.isNotEmpty(param.getCardType())) {
+			key.append(param.getCardType());
+		}
+		if (StringUtils.isNotEmpty(param.getBelongBank())) {
+			key.append(param.getBelongBank());
+		}
+		if (StringUtils.isNotEmpty(param.getCardholderProperty())) {
+			key.append(param.getCardholderProperty());
+		}
+		key.append("mchFee");
+		return key.toString();
 	}
 
 

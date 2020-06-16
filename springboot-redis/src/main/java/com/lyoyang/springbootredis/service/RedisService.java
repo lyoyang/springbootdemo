@@ -21,6 +21,7 @@ import redis.clients.jedis.JedisCommands;
 import redis.clients.jedis.Protocol;
 import redis.clients.util.SafeEncoder;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +160,16 @@ public class RedisService {
     }
 
 
+    public Serializable get(String key, String subKey) {
+        if (redisTemplate.opsForHash().hasKey(key, subKey)) {
+            return (Serializable) redisTemplate.opsForHash().get(key, subKey);
+        }
+        return null;
+    }
 
+    public void putObject(String key, String subKey, Serializable serializable, int expireSeconds) {
+        redisTemplate.opsForHash().put(key, subKey, serializable);
+        redisTemplate.expire(key, expireSeconds, TimeUnit.MINUTES);
+    }
 
 }
