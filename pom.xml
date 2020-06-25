@@ -53,11 +53,9 @@
         <module>springboot-redis</module>
         <module>springboot-netty</module>
         <module>springboot-mybatis</module>
-        <module>springboot-multipledatasource-transaction</module>
         <module>springboot-mq</module>
         <module>springboot-lianshou</module>
         <module>springboot-jsp</module>
-        <module>springboot-jsp2</module>
         <module>springboot-jpa</module>
         <module>springboot-jdbc</module>
         <module>springboot-elasticsearch</module>
