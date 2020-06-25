@@ -1,6 +1,6 @@
-package com.lyoyang.rabbitmq.service;
+package com.lyoyang.rocketmq.service;
 
-import com.lyoyang.rabbitmq.bean.User;
+import com.lyoyang.rocketmq.bean.User;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 

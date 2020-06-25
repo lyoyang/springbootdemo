@@ -1,4 +1,4 @@
-package com.lyoyang.rabbitmq.service;
+package com.lyoyang.rocketmq.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

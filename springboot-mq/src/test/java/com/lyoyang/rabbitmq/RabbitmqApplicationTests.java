@@ -1,6 +1,8 @@
 package com.lyoyang.rabbitmq;
 
-import com.lyoyang.rabbitmq.bean.User;
+import com.lyoyang.rabbitmq.consumer.OrderConsumer;
+import com.lyoyang.rabbitmq.producer.OrderProducer;
+import com.lyoyang.rocketmq.bean.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -14,13 +16,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringbootRabbitmqApplicationTests {
+public class RabbitmqApplicationTests {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
 	@Autowired
 	private AmqpAdmin amqpAdmin;
+
+	@Autowired
+	private OrderProducer orderProducer;
+
+
 
 	@Test
 	public void create_exchange() {
@@ -65,6 +72,13 @@ public class SpringbootRabbitmqApplicationTests {
 		String message = "这是一条广播消息";
 		Message msg = new Message(message.getBytes(),new MessageProperties());
 		rabbitTemplate.send(exchange,routeKey,msg);
+	}
+
+
+	@Test
+	public void sendMsg() {
+		String msg = "hello, a simple msg test";
+		orderProducer.send(msg, null);
 	}
 
 }

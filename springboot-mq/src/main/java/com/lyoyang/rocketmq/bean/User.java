@@ -1,4 +1,4 @@
-package com.lyoyang.rabbitmq.bean;
+package com.lyoyang.rocketmq.bean;
 
 import lombok.Builder;
 import lombok.Data;

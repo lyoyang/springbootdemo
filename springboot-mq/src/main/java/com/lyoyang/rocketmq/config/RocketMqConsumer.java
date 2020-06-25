@@ -1,6 +1,6 @@
-package com.lyoyang.rabbitmq.config;
+package com.lyoyang.rocketmq.config;
 
-import com.lyoyang.rabbitmq.service.MQConsumeMsgListenerProcessor;
+import com.lyoyang.rocketmq.service.MQConsumeMsgListenerProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;

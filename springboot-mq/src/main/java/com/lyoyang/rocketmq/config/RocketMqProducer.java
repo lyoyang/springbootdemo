@@ -1,4 +1,4 @@
-package com.lyoyang.rabbitmq.config;
+package com.lyoyang.rocketmq.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;

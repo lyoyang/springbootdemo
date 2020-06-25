@@ -1,9 +1,7 @@
-package com.lyoyang.rabbitmq.controller;
+package com.lyoyang.rocketmq.controller;
 
-import com.lyoyang.rabbitmq.Utils.RabbitMQUtil;
-import com.lyoyang.rabbitmq.bean.User;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import com.lyoyang.rocketmq.RabbitMQUtil;
+import com.lyoyang.rocketmq.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

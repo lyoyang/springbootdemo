@@ -1,4 +1,4 @@
-package com.lyoyang.rabbitmq.config;
+package com.lyoyang.rocketmq.config;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

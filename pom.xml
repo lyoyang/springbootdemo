@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lyoyang</groupId>
+    <artifactId>springboot-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>springboot-demo</name>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
+        <file_encoding>UTF-8</file_encoding>
+        <encoding>UTF-8</encoding>
+        <downloadSources>true</downloadSources>
+        <java.version>1.8</java.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.10</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <modules>
+        <module>springboot-webflux</module>
+        <module>springboot-thymeleaf</module>
+        <module>springboot-start</module>
+        <module>spring-activity</module>
+        <module>springboot-security</module>
+        <module>spring-security-oauth</module>
+        <module>springboot-redis</module>
+        <module>springboot-netty</module>
+        <module>springboot-mybatis</module>
+        <module>springboot-multipledatasource-transaction</module>
+        <module>springboot-mq</module>
+        <module>springboot-lianshou</module>
+        <module>springboot-jsp</module>
+        <module>springboot-jsp2</module>
+        <module>springboot-jpa</module>
+        <module>springboot-jdbc</module>
+        <module>springboot-elasticsearch</module>
+        <module>springboot-cache</module>
+        <module>boot-dubbo-consumer</module>
+        <module>boot-dubbo-provider</module>
+        <module>boot-common</module>
+        <module>boot-api</module>
+    </modules>
+
+
+
+
+</project>

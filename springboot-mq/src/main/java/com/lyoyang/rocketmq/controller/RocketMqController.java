@@ -1,7 +1,7 @@
-package com.lyoyang.rabbitmq.controller;
+package com.lyoyang.rocketmq.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lyoyang.rabbitmq.bean.User;
+import com.lyoyang.rocketmq.bean.User;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
