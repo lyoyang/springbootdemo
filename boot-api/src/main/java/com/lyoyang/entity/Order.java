@@ -1,11 +1,14 @@
-package com.lyoyang.rabbitmq.entity;
+package com.lyoyang.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class Order {
+@Builder
+public class Order implements Serializable {
 
     private String transId;
 

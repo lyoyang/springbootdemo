@@ -1,6 +1,6 @@
-package com.lyoyang.rabbitmq.consumer;
+package com.lyoyang.consumer;
 
-import com.lyoyang.rabbitmq.entity.Order;
+import com.lyoyang.entity.Order;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.*;
@@ -65,7 +65,11 @@ public class OrderConsumer {
     public void onOrderMsg(@Payload Order order, Channel channel, @Headers Map<String, Object> headers) throws IOException {
         log.info("reveive order:" + order.getTransId());
         Long deliverTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
-        channel.basicAck(deliverTag, false);
+        if (order.getTransId().equals("454675675")) {
+            channel.basicNack(deliverTag, false, false);
+        } else {
+            channel.basicAck(deliverTag, false);
+        }
     }
 
 

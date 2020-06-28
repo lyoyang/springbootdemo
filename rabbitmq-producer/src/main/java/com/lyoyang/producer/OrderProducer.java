@@ -1,9 +1,9 @@
-package com.lyoyang.rabbitmq.producer;
+package com.lyoyang.producer;
 
-import com.lyoyang.rabbitmq.entity.Order;
+import com.lyoyang.entity.Order;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
@@ -59,6 +59,7 @@ public class OrderProducer {
         rabbitTemplate.setConfirmCallback(confirmCallback);
         rabbitTemplate.convertAndSend(simpleExchange, simpleKey, msg, correlationData);
     }
+
 
 
     public void sendOrder(Order order) {

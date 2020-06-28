@@ -1,6 +1,7 @@
-package com.lyoyang.rabbitmq;
+package com.lyoyang;
 
-import com.lyoyang.rocketmq.bean.User;
+import com.lyoyang.entity.Order;
+import com.lyoyang.producer.OrderProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RabbitmqApplicationTests {
@@ -21,6 +24,9 @@ public class RabbitmqApplicationTests {
 
 	@Autowired
 	private AmqpAdmin amqpAdmin;
+
+	@Autowired
+	private OrderProducer orderProducer;
 
 
 
@@ -45,15 +51,6 @@ public class RabbitmqApplicationTests {
 	}
 
 	@Test
-	public void test_obj() {
-
-		String exchange = "exchange.direct";
-		String routeKey = "atguigu";
-		User user = new User(1, "jim", "male");
-		rabbitTemplate.convertAndSend(exchange,routeKey,user);
-	}
-
-	@Test
 	public void test_get() {
 		String routeKey = "atguigu";
 		Object o = rabbitTemplate.receiveAndConvert(routeKey);
@@ -68,4 +65,22 @@ public class RabbitmqApplicationTests {
 		Message msg = new Message(message.getBytes(),new MessageProperties());
 		rabbitTemplate.send(exchange,routeKey,msg);
 	}
+
+
+	@Test
+	public void sendMsg() {
+		String msg = "hello, a simple msg test";
+		orderProducer.send(msg, null);
+	}
+
+	@Test
+	public void sendOrder() {
+
+		Order order = Order.builder().transId("34354356346576575675")
+				.accDate("2020-06-25")
+				.fee(new BigDecimal("23.45")).build();
+
+		orderProducer.sendOrder(order);
+	}
+
 }

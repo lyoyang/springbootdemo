@@ -64,6 +64,10 @@
         <module>boot-dubbo-provider</module>
         <module>boot-common</module>
         <module>boot-api</module>
+        <module>springboot-activiti</module>
+        <module>springboot-jvm</module>
+        <module>rabbitmq-producer</module>
+        <module>rabbitmq-consumer</module>
     </modules>
 
 
