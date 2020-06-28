@@ -68,6 +68,8 @@
         <module>springboot-jvm</module>
         <module>rabbitmq-producer</module>
         <module>rabbitmq-consumer</module>
+        <module>kafka-producer</module>
+        <module>kafka-consumer</module>
     </modules>
 
 
