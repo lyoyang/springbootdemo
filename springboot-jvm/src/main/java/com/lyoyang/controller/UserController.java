@@ -1,9 +1,11 @@
 package com.lyoyang.controller;
 
 import com.lyoyang.entity.User;
+import com.lyoyang.service.CustomService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +16,15 @@ public class UserController {
     private List<User> userList = new ArrayList<>();
     private Object lock1 = new Object();
     private Object lock2 = new Object();
+
+    @Resource
+    private CustomService customService;
+
+
+    @RequestMapping("/getInfo")
+    public String getInfo() {
+        return customService.sayHello();
+    }
 
 
     //堆内存溢出

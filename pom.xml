@@ -70,6 +70,7 @@
         <module>rabbitmq-consumer</module>
         <module>kafka-producer</module>
         <module>kafka-consumer</module>
+        <module>custom-starter</module>
     </modules>
 
 
