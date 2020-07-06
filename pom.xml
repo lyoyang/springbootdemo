@@ -71,6 +71,8 @@
         <module>kafka-producer</module>
         <module>kafka-consumer</module>
         <module>custom-starter</module>
+        <module>rocketmq-producer</module>
+        <module>rocketmq-consumer</module>
     </modules>
 
 

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rabbitmq-producer</artifactId>
+    <artifactId>rocketmq-consumer</artifactId>
 
 
     <dependencies>
@@ -72,13 +72,6 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.7.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.lyoyang</groupId>
-            <artifactId>boot-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
 </project>
