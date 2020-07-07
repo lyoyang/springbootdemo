@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description:
  */
 @SpringBootApplication
-public class PeoducerApp {
+public class ProducerApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(PeoducerApp.class, args);
+        SpringApplication.run(ProducerApp.class, args);
     }
 
 }

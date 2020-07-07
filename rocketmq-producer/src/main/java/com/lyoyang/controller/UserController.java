@@ -43,6 +43,8 @@ public class UserController {
         user.setPassword("123456");
         String data = JSONObject.toJSONString(user);
         Message message = new Message(simpleTopic, simpleTag, data.getBytes());
+        message.setKeys("simple_key");
+//        message.putUserProperty("pro1", "pro1");
         SendResult send;
         try {
             send = simpleProducer.send(message);

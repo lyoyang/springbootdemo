@@ -29,6 +29,6 @@ public class SimpleMessageListener implements MessageListenerConcurrently {
         }
         MessageExt messageExt = msgs.get(0);
         log.info("接受到的消息为：" + new String(messageExt.getBody(), StandardCharsets.UTF_8));
-        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }
