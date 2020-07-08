@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="boot-user-service-consumer" />
+	
+	<!-- 2、指定注册中心的位置 -->
+	<dubbo:registry id="consumerDubbo" protocol="zookeeper" address="192.168.205.10:2181"/>
+	
+	<!-- 3、指定通信规则（通信协议？通信端口） -->
+	<dubbo:protocol name="dubbo" port="20883" />
+	
+
+	<!--统一设置服务提供方的规则  -->
+	<dubbo:provider timeout="10000" />
+
+	<dubbo:reference id="calculationServiceApi"
+					 interface="com.lyoyang.api.UserService"
+					 version="1.0.0"
+					 check="false" timeout="10000" retries="0"
+					 group="beta" registry="consumerDubbo" />
+
+	
+	
+
+</beans>

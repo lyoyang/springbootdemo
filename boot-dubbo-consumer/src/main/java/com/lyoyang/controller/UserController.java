@@ -4,11 +4,10 @@ import com.lyoyang.api.UserService;
 import com.lyoyang.entity.MvcMessage;
 import com.lyoyang.entity.MvcResponse;
 import com.lyoyang.entity.User;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Iterator;
@@ -17,13 +16,17 @@ import java.util.Set;
 @RestController
 public class UserController {
 
-    @Reference(validation = "true")
+    @Resource
     private UserService userService;
 
 //    @HystrixCommand(fallbackMethod = "defaultValue")
     @RequestMapping("/getUserById")
-    public MvcResponse getUserById(User user) {
+    public MvcResponse getUserById(Integer id) {
         try {
+            User user = new User();
+            user.setId(id);
+            user.setPassword("123456");
+            user.setUsername("jim" + id);
             User userInfo = userService.getUserInfoById(user);
             return new MvcResponse(MvcMessage.CODE_SUCCESS, userInfo);
         } catch (Exception e) {
