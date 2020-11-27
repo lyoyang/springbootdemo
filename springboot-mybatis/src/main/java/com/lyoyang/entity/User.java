@@ -1,15 +1,11 @@
 package com.lyoyang.entity;
 
-/**
- * @Auther: yangbing
- * @Date: 2018/12/7 09:37
- * @Description:
- */
 public class User {
-
     private Integer id;
-    private String name;
-    private String birthday;
+
+    private String username;
+
+    private String email;
 
     public Integer getId() {
         return id;
@@ -19,19 +15,19 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

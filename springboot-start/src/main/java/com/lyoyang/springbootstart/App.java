@@ -10,19 +10,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"com.lyoyang.springbootstart.controller","com.lyoyang.springbootstart.service","com.lyoyang.springbootstart.entity","com.lyoyang.springbootstart.datasource","com.lyoyang.springbootstart.aspect"})
-@EnableAutoConfiguration
 @MapperScan("com.lyoyang.springbootstart.mapper")
-@SpringBootConfiguration
-@EnableConfigurationProperties
-public class App extends SpringBootServletInitializer {
+//@SpringBootConfiguration
+//@EnableConfigurationProperties
+@SpringBootApplication
+public class App {
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(App.class);
-	}
 }

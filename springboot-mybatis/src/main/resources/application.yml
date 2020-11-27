@@ -1,7 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true
+#    url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true
+    url: jdbc:mysql://192.168.1.129:3306/test?allowMultiQueries=true
     username: root
     password: root
 #    schema:

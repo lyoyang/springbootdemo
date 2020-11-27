@@ -11,8 +11,11 @@
         </commentGenerator>
 
         <!-- 数据库连接配置 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"
-                        userId="root" password="yang2826"/>
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"-->
+<!--                        userId="root" password="root"/>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.129:3306/test"
+                        userId="root" password="root"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
@@ -25,9 +28,14 @@
         <javaClientGenerator targetPackage="com.lyoyang.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
 
-        <table schema="" tableName="student" domainObjectName="Student">
+        <table schema="" tableName="user" domainObjectName="User">
             <property name="useActualColumnNames" value="false"/>
         </table>
+
+
+
+
+
 
     </context>
 </generatorConfiguration>
