@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -22,6 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 接收表单参数
+ * @author yu 2019/10/29.
+ */
 @RestController
 public class UserController {
 
@@ -33,67 +38,61 @@ public class UserController {
     private Object lock2 = new Object();
 
 
-    //堆内存溢出
-    @RequestMapping("/addUser")
-    public void addUser() {
-        while (true) {
-            String uuid = UUID.randomUUID().toString();
-            userList.add(new User(uuid, uuid + ":user"));
-        }
-    }
+//    //堆内存溢出
+//    @RequestMapping("/addUser")
+//    public void addUser() {
+//        while (true) {
+//            String uuid = UUID.randomUUID().toString();
+//            userList.add(new User(uuid, uuid + ":user"));
+//        }
+//    }
 
 
     //死锁
-    @RequestMapping("/deadLock")
-    public String deadLock() {
-        new Thread(()->{
-            synchronized (lock1){
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                synchronized (lock2) {
-                    System.out.println("Thread1 over");
-                }
-            }
-        }).start();
-        new Thread(()->{
-            synchronized (lock2){
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                synchronized (lock1) {
-                    System.out.println("Thread1 over");
-                }
-            }
-        }).start();
-        return "dead lock";
-    }
+//    @RequestMapping("/deadLock")
+//    public String deadLock() {
+//        new Thread(()->{
+//            synchronized (lock1){
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                synchronized (lock2) {
+//                    System.out.println("Thread1 over");
+//                }
+//            }
+//        }).start();
+//        new Thread(()->{
+//            synchronized (lock2){
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                synchronized (lock1) {
+//                    System.out.println("Thread1 over");
+//                }
+//            }
+//        }).start();
+//        return "dead lock";
+//    }
 
 
     @RequestMapping("/hello")
-    public String hello(HttpServletRequest request, HttpServletResponse response) {
-        String privateKey = aliPayProperties.getPrivateKey();
-        System.out.println(privateKey);
+    public String hello(HttpServletRequest request, HttpServletResponse response, String name) {
         return "hello";
     }
 
 
-    @RequestMapping("/sayHello")
-    public String sayHello(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        String id = request.getSession().getId();
-        System.out.println("sessionId=" + id);
-        return "sayHello";
+    @RequestMapping("/hello2")
+    public String hello2(@RequestBody User user) {
+        return "hello";
     }
 
-
-    @RequestMapping("/aliNotify")
-    public String aliNotify() {
-        return "aliNotify";
+    @RequestMapping("/hello3")
+    public String hello2(String name, MultipartFile multipartFile) {
+        return "hello";
     }
 
 

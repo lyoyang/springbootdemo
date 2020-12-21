@@ -3,8 +3,11 @@ package com.lyoyang.mapper;
 import com.lyoyang.entity.User;
 import com.lyoyang.entity.UserExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserMapper {
     int countByExample(UserExample example);
 
