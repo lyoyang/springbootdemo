@@ -35,4 +35,14 @@ public class CronController {
         return "success";
     }
 
+
+    @GetMapping("/cancelJob")
+    public String cancelJob() {
+        SchedulingRunnable task = new SchedulingRunnable("cronService", "printInfo");
+        cronTaskRegistrar.removeCronTask(task);
+        return "SUCCESS";
+    }
+
+
+
 }
