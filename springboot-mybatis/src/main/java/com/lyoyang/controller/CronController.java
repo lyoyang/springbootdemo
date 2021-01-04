@@ -6,9 +6,7 @@ import com.lyoyang.cron.SchedulingRunnable;
 import com.lyoyang.entity.SysJob;
 import com.lyoyang.mapper.SysJobMapper;
 import com.lyoyang.utils.DateUtil;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +31,15 @@ public class CronController {
         String format = LocalDateTime.parse(sysJob.getStartTime(), DateTimeFormatter.ofPattern(DateUtil.FORMAT_DATETIME)).format(DateTimeFormatter.ofPattern(DateUtil.FORMAT_CRON));
         cronTaskRegistrar.addCronTask(schedulingRunnable, format);
         return "success";
+    }
+
+
+
+    @GetMapping("/cancelJob")
+    public String cancelJob() {
+        SchedulingRunnable task = new SchedulingRunnable("cronService", "printInfo");
+        cronTaskRegistrar.removeCronTask(task);
+        return "SUCCESS";
     }
 
 

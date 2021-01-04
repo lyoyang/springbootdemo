@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/test
+      username: root
+      password: root
+      minimum-idle: 10
+  quartz:
+    
