@@ -8,6 +8,7 @@ import com.lyoyang.mapper.ChannelFeeConfigMapper;
 import com.lyoyang.mapper.DepartmentMapper;
 import com.lyoyang.mapper.EmployeeMapper;
 import com.lyoyang.mapper.StudentMapper;
+import com.lyoyang.service.CustomService;
 import com.lyoyang.service.StudentService;
 import com.lyoyang.utils.DateUtil;
 import org.junit.Test;
@@ -43,6 +44,9 @@ public class SpringbootMybatisApplicationTests {
 
 	@Autowired
 	private ChannelFeeConfigMapper channelFeeConfigMapper;
+
+	@Resource
+	private CustomService customService;
 
 	@Test
 	public void contextLoads() throws SQLException {
@@ -80,6 +84,15 @@ public class SpringbootMybatisApplicationTests {
 		studentService.saveStudent(student);
 	}
 
+
+	@Test
+	public void testTra() throws InterruptedException {
+		customService.saveStudent();
+		Thread.currentThread().join();
+
+
+
+	}
 
 
 }

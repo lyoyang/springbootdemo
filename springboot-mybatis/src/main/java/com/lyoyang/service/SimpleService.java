@@ -6,4 +6,6 @@ public interface SimpleService {
 
     void saveEmployee(User user);
 
+    void updateStudent();
+
 }
