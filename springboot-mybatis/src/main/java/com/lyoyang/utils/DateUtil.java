@@ -79,6 +79,8 @@ public class DateUtil extends Object {
      */
     public final static String FORMAT_ISOTIME = "yyyyMMdd";
 
+    public final static String FORMAT_CRON = "ss mm HH dd MM ?";
+
 
     public static Date getMinuteBefore(int min) {
         Calendar calendar = Calendar.getInstance();

@@ -11,8 +11,11 @@
         </commentGenerator>
 
         <!-- 数据库连接配置 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"
-                        userId="root" password="root"/>
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"-->
+<!--                        userId="root" password="root"/>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.10.220.120:3306/test"
+                        userId="root" password="urcs@2018"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="true"/>
@@ -25,21 +28,10 @@
         <javaClientGenerator targetPackage="com.lyoyang.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
 
-        <!--<table schema="" tableName="student" domainObjectName="Student">-->
-            <!--<property name="useActualColumnNames" value="false"/>-->
-        <!--</table>-->
-        <!--<table schema="" tableName="account" domainObjectName="Account">-->
-            <!--<property name="useActualColumnNames" value="false"/>-->
-        <!--</table>-->
-
-        <!--<table schema="" tableName="account_isam" domainObjectName="AccountIsam">-->
-            <!--<property name="useActualColumnNames" value="false"/>-->
-        <!--</table>-->
-
-
-        <table schema="" tableName="calculation_unstatistical" domainObjectName="CalculationUnStatistical">
+        <table schema="" tableName="sys_job" domainObjectName="SysJob">
             <property name="useActualColumnNames" value="false"/>
         </table>
+
 
     </context>
 </generatorConfiguration>

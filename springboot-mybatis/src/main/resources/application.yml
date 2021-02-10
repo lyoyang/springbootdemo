@@ -1,9 +1,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-wz9nso58u587cf0fg.mysql.rds.aliyuncs.com:3306/realtime_charging
-    username: ipnrlcharge
-    password: t#dqLKINl4wE41$sJHh$
+#    url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true
+    url: jdbc:mysql://10.10.220.120:3306/test?allowMultiQueries=true
+    username: root
+    password: urcs@2018
 #    schema:
 #      - classpath:sql/department.sql
 #      - classpath:sql/employee.sql
@@ -34,4 +35,3 @@ spring:
       enabled: true
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
-  config-location: classpath:mybatis/mybatis-config.xml
