@@ -1,0 +1,28 @@
+server:
+  port: 8087
+
+management:
+  endpoint:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: springboot-sentinel
+  cloud:
+    sentinel:
+      eager: true
+      enabled: true
+      transport:
+        dashboard: localhost:8080
+      datasource:
+        ds:
+          nacos:
+            server-addr: 10.10.220.122:8848
+            dataId: ${spring.application.name}-flow-rules
+            groupId: SENTINEL_GROUP
+
+            rule-type: flow
+
+
