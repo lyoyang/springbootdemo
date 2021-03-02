@@ -53,8 +53,8 @@ public class MqConfig {
         DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
         defaultMQPushConsumer.setNamesrvAddr(brokerServer);
         //设置消费模型，集群还是广播，默认为集群
-//        defaultMQPushConsumer.setMessageModel(MessageModel.CLUSTERING);
-        defaultMQPushConsumer.setMessageModel(MessageModel.BROADCASTING);
+        defaultMQPushConsumer.setMessageModel(MessageModel.CLUSTERING);
+//        defaultMQPushConsumer.setMessageModel(MessageModel.BROADCASTING);
         defaultMQPushConsumer.setConsumeThreadMin(minThread);
         defaultMQPushConsumer.setConsumeThreadMax(maxThread);
         defaultMQPushConsumer.registerMessageListener(simpleMessageListener);
@@ -67,7 +67,7 @@ public class MqConfig {
         //设置一次消费消息的条数，默认为1条
         defaultMQPushConsumer.setConsumeMessageBatchMaxSize(maxConsumeBatchSize);
         try {
-            defaultMQPushConsumer.subscribe(simpleTopic, "TagA");
+            defaultMQPushConsumer.subscribe(simpleTopic, "*");
 //            defaultMQPushConsumer.subscribe(simpleTopic, MessageSelector.bySql(""));
             defaultMQPushConsumer.start();
         } catch (MQClientException e) {
